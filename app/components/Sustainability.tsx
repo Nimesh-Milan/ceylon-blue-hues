@@ -38,7 +38,7 @@ export default function Sustainability() {
                 />
                 <div className="relative aspect-[4/3] overflow-hidden group">
                   <Image
-                      src="/images/BlueHuesSustainability.jpg"
+                      src="/images/CeyBlueHuesSus2.png"
                       alt="A rough, uncut sapphire held in hand"
                       fill
                       className={`object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04] ${

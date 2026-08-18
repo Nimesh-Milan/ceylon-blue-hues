@@ -42,7 +42,7 @@ export default function About() {
                 <p className="first-letter:font-serif first-letter:italic first-letter:text-gold first-letter:text-6xl first-letter:mr-2 first-letter:float-left first-letter:leading-[0.8] first-letter:mt-1">
                   For <span className="text-gold">generations</span>, our family has been deeply
                   rooted in the rich soil of Sri Lanka, unearthing the treasures that lie beneath.
-                  Blue Hues Ceylon is the culmination of this legacy, a bridge between the ancient
+                  Ceylon Blue Hues is the culmination of this legacy, a bridge between the ancient
                   traditions of gemstone mining and the modern world.
                 </p>
                 <p>
@@ -89,7 +89,7 @@ export default function About() {
                 />
                 <div className="relative aspect-[4/3] overflow-hidden group">
                   <Image
-                      src="/images/sri-lanka-mines.jpg"
+                      src="/images/CeyBlueHuesAbout.jpg"
                       alt="Artisanal gemstone mining in Sri Lanka"
                       fill
                       className={`object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04] ${

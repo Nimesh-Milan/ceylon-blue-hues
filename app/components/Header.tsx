@@ -77,7 +77,7 @@ export default function Header() {
                         <Link href="/" className="flex-shrink-0 group">
                             <Image
                                 src="/images/BlueHuesLogo.png"
-                                alt="Blue Hues Ceylon"
+                                alt="CeylonBlue Hues"
                                 width={150}
                                 height={46}
                                 className={`h-9 w-auto object-contain transition-all duration-500 ease-[var(--ease-lux)] group-hover:opacity-80 ${
@@ -161,7 +161,7 @@ export default function Header() {
                         <Link href="/" className="flex-shrink-0" onClick={() => setMenuOpen(false)}>
                             <Image
                                 src="/images/BlueHuesLogo.png"
-                                alt="Blue Hues Ceylon"
+                                alt="Ceylon Blue Hues"
                                 width={140}
                                 height={44}
                                 className="h-9 w-auto object-contain"

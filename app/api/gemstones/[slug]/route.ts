@@ -27,12 +27,13 @@ interface Media extends RowDataPacket {
 
 export async function GET(
     request: Request,
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ) {
     try {
+        const { slug } = await params;
         const [gemstones] = await pool.query<Gemstone[]>(
             'SELECT * FROM gemstones WHERE slug = ?',
-            [params.slug]
+            [slug]
         );
 
         if (gemstones.length === 0) {
@@ -53,15 +54,12 @@ export async function GET(
         const result = {
             ...gemstone,
             specs,
-            media: media.map((m) => ({
-                ...m,
-                file_path: `/uploads/gemstones/${m.file_path}`,
-            })),
+            media,
         };
 
         return NextResponse.json(result);
     } catch (error) {
-        console.error(`Failed to fetch gemstone ${params.slug}:`, error);
+        console.error('Failed to fetch gemstone:', error);
         return NextResponse.json(
             { error: 'Failed to fetch gemstone' },
             { status: 500 }

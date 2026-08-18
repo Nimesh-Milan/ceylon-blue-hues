@@ -18,20 +18,11 @@ export default function Hero() {
 
     return (
         <section id="top" className="relative min-h-screen w-full overflow-hidden flex items-center justify-center">
-            {/* Background Video */}
-            <div className="absolute inset-0 z-0">
-                <video
-                    className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-out ${
-                        isMounted ? 'scale-100' : 'scale-110'
-                    }`}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    poster="/images/hero-poster.jpg"
-                >
-                    <source src="/videos/hero-background.mp4" type="video/mp4" />
-                </video>
+            {/* Background Image */}
+            <div
+                className="absolute inset-0 z-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/images/Blue Hues hero Image.png')" }}
+            >
                 {/* layered vignette — reads as intentional grading rather than a single flat overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
@@ -92,25 +83,6 @@ export default function Hero() {
                     </span>
                 </a>
             </div>
-
-            <style jsx>{`
-                @keyframes scrollLine {
-                    0% {
-                        transform: translateY(-100%);
-                    }
-                    60% {
-                        transform: translateY(100%);
-                    }
-                    100% {
-                        transform: translateY(200%);
-                    }
-                }
-                @media (prefers-reduced-motion: reduce) {
-                    .animate-\\[scrollLine_2\\.2s_ease-in-out_infinite\\] {
-                        animation: none;
-                    }
-                }
-            `}</style>
         </section>
     );
 }
