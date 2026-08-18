@@ -2,11 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-
-interface GemstoneMedia {
-    file_path: string;
-    type: 'image' | 'video';
-}
+import type { GemstoneMedia } from '@/types/gemstone';
 
 interface GemstoneGalleryProps {
     media: GemstoneMedia[];
@@ -14,8 +10,6 @@ interface GemstoneGalleryProps {
 }
 
 // Treat anything not explicitly a video as an image, and match case-insensitively.
-// Previously an unexpected/mistyped `type` (e.g. "Image", "cad", "render") fell
-// through to a blank frame instead of ever rendering the file.
 const isVideo = (m?: GemstoneMedia | null) => m?.type?.toLowerCase() === 'video';
 
 export default function GemstoneGallery({ media, name }: GemstoneGalleryProps) {
@@ -34,7 +28,7 @@ export default function GemstoneGallery({ media, name }: GemstoneGalleryProps) {
             }`}
             style={{ transitionTimingFunction: 'var(--ease-lux)' }}
         >
-            {/* main stage — generous padding so the stone sits like a piece in a vitrine, not a cropped thumbnail */}
+            {/* Main stage */}
             <div className="relative aspect-[4/3] bg-cream border border-stone/10 overflow-hidden">
                 <div key={activeMedia?.file_path} className="absolute inset-6 sm:inset-10 fade-media">
                     {activeMedia && !isVideo(activeMedia) ? (
@@ -60,7 +54,7 @@ export default function GemstoneGallery({ media, name }: GemstoneGalleryProps) {
                 </div>
             </div>
 
-            {/* thumbnail strip — a quiet gold underline marks the active piece, no boxed borders */}
+            {/* Thumbnail strip */}
             {media && media.length > 1 && (
                 <div className="flex gap-5">
                     {media.map((mediaItem) => {
@@ -106,25 +100,6 @@ export default function GemstoneGallery({ media, name }: GemstoneGalleryProps) {
                     })}
                 </div>
             )}
-
-            <style jsx>{`
-                .fade-media {
-                    animation: fadeMedia 500ms var(--ease-lux, ease) both;
-                }
-                @keyframes fadeMedia {
-                    from {
-                        opacity: 0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @media (prefers-reduced-motion: reduce) {
-                    .fade-media {
-                        animation: none;
-                    }
-                }
-            `}</style>
         </div>
     );
 }

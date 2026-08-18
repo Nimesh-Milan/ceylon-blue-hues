@@ -332,22 +332,6 @@ export default function GemstoneDetailPage({ params }: { params: Promise<{ id: s
                     </>
                 )}
             </div>
-
-            <style jsx>{`
-                .shimmer {
-                    background: linear-gradient(90deg, transparent 0%, rgba(190, 158, 90, 0.15) 50%, transparent 100%);
-                    background-size: 200% 100%;
-                    animation: shimmer 1.6s ease-in-out infinite;
-                }
-                @keyframes shimmer {
-                    0% { background-position: 200% 0; }
-                    100% { background-position: -200% 0; }
-                }
-                @media (prefers-reduced-motion: reduce) {
-                    .shimmer { animation: none; }
-                    .animate-spin { animation: none; }
-                }
-            `}</style>
         </div>
     );
 }

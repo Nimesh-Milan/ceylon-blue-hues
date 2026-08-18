@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import SearchOverlay from './SearchOverlay';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
     const isHomePage = pathname === '/';
@@ -23,11 +25,21 @@ export default function Header() {
 
     // Prevent body scroll when mobile menu is open
     useEffect(() => {
-        document.body.style.overflow = menuOpen ? 'hidden' : '';
+        if (!searchOpen) {
+            document.body.style.overflow = menuOpen ? 'hidden' : '';
+        }
         return () => {
-            document.body.style.overflow = '';
+            if (!searchOpen) document.body.style.overflow = '';
         };
-    }, [menuOpen]);
+    }, [menuOpen, searchOpen]);
+
+    // Close mobile menu on route change (back/forward navigation)
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [pathname]);
+
+    const closeMenu = useCallback(() => setMenuOpen(false), []);
+    const closeSearch = useCallback(() => setSearchOpen(false), []);
 
     const links = [
         { href: isHomePage ? '#about' : '/#about', label: 'About' },
@@ -59,6 +71,9 @@ export default function Header() {
 
     return (
         <>
+            {/* Search Overlay */}
+            <SearchOverlay isOpen={searchOpen} onClose={closeSearch} />
+
             <header
                 className={`fixed top-0 inset-x-0 z-40 transition-all duration-700 ease-[var(--ease-lux)] ${
                     solid ? 'bg-cream/85 backdrop-blur-xl shadow-[0_1px_0_0_rgba(0,0,0,0.04),0_12px_30px_-15px_rgba(0,0,0,0.15)]' : 'bg-transparent'
@@ -106,9 +121,11 @@ export default function Header() {
 
                             <div className={`w-px h-4 ${solid ? 'bg-stone/15' : 'bg-white/25'}`} />
 
+                            {/* Search button — now functional */}
                             <button
-                                onClick={() => console.log('Search clicked')}
-                                aria-label="Search"
+                                id="search-btn"
+                                onClick={() => setSearchOpen(true)}
+                                aria-label="Search gemstones"
                                 className={`${linkColor} transition-all duration-300 hover:scale-110`}
                             >
                                 <SearchIcon className="w-[18px] h-[18px]" />
@@ -133,8 +150,17 @@ export default function Header() {
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <div className="md:hidden">
+                        <div className="md:hidden flex items-center gap-4">
                             <button
+                                id="mobile-search-btn"
+                                onClick={() => setSearchOpen(true)}
+                                aria-label="Search gemstones"
+                                className={`${solid ? 'text-stone' : 'text-white'} hover:text-gold transition-colors duration-300`}
+                            >
+                                <SearchIcon className="w-5 h-5" />
+                            </button>
+                            <button
+                                id="mobile-menu-btn"
                                 onClick={() => setMenuOpen(true)}
                                 aria-label="Open menu"
                                 className={`${solid ? 'text-stone' : 'text-white'} hover:text-gold transition-colors duration-300`}
@@ -158,7 +184,7 @@ export default function Header() {
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
-                        <Link href="/" className="flex-shrink-0" onClick={() => setMenuOpen(false)}>
+                        <Link href="/" className="flex-shrink-0" onClick={closeMenu}>
                             <Image
                                 src="/images/BlueHuesLogo.png"
                                 alt="Ceylon Blue Hues"
@@ -169,7 +195,7 @@ export default function Header() {
                             />
                         </Link>
                         <button
-                            onClick={() => setMenuOpen(false)}
+                            onClick={closeMenu}
                             aria-label="Close menu"
                             className="text-stone hover:text-gold hover:rotate-90 transition-all duration-500 ease-[var(--ease-lux)]"
                         >
@@ -184,7 +210,7 @@ export default function Header() {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                onClick={() => setMenuOpen(false)}
+                                onClick={closeMenu}
                                 style={{
                                     transitionDelay: menuOpen ? `${120 + i * 70}ms` : '0ms',
                                 }}
@@ -203,7 +229,7 @@ export default function Header() {
                         />
                         <Link
                             href="/#contact"
-                            onClick={() => setMenuOpen(false)}
+                            onClick={closeMenu}
                             style={{ transitionDelay: menuOpen ? `${180 + links.length * 70}ms` : '0ms' }}
                             className={`mt-6 inline-flex justify-center py-3 px-12 bg-stone text-white uppercase tracking-[0.2em] text-xs font-medium hover:bg-gold transition-all duration-500 ease-[var(--ease-lux)] ${
                                 menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'

@@ -3,27 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import GemstoneCard from './GemstoneCard';
 import { useInView } from '../hooks/useInView';
-
-// Define types for our data structure
-interface GemstoneSpec {
-    label: string;
-    value: string;
-}
-
-interface GemstoneMedia {
-    file_path: string;
-    type: 'image' | 'video';
-}
-
-interface Gemstone {
-    id: number;
-    name: string;
-    slug: string;
-    description: string;
-    category: string;
-    specs: GemstoneSpec[];
-    media: GemstoneMedia[];
-}
+import type { Gemstone } from '@/types/gemstone';
 
 const SkeletonCard = () => (
     <div>
@@ -41,32 +21,29 @@ const SkeletonCard = () => (
     </div>
 );
 
-// Moved outside to prevent re-mounting on every render
 const FilterButton = ({
-                          category,
-                          isActive,
-                          onClick
-                      }: {
+    category,
+    isActive,
+    onClick,
+}: {
     category: string;
     isActive: boolean;
     onClick: () => void;
-}) => {
-    return (
-        <button
-            onClick={onClick}
-            className={`relative pb-2 px-1 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
-                isActive ? 'text-stone font-medium' : 'text-mid/60 hover:text-stone'
+}) => (
+    <button
+        onClick={onClick}
+        className={`relative pb-2 px-1 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
+            isActive ? 'text-stone font-medium' : 'text-mid/60 hover:text-stone'
+        }`}
+    >
+        {category}
+        <span
+            className={`absolute bottom-0 left-0 h-px bg-gold transition-all duration-500 ease-[var(--ease-lux)] ${
+                isActive ? 'w-full' : 'w-0'
             }`}
-        >
-            {category}
-            <span
-                className={`absolute bottom-0 left-0 h-px bg-gold transition-all duration-500 ease-[var(--ease-lux)] ${
-                    isActive ? 'w-full' : 'w-0'
-                }`}
-            />
-        </button>
-    );
-};
+        />
+    </button>
+);
 
 export default function GemstoneCollection() {
     const [gemstones, setGemstones] = useState<Gemstone[]>([]);
@@ -78,13 +55,8 @@ export default function GemstoneCollection() {
     useEffect(() => {
         async function fetchGemstones() {
             try {
-                // Artificial delay removed for production
-                // await new Promise((resolve) => setTimeout(resolve, 1500));
-
                 const response = await fetch('/api/gemstones');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch gemstones');
-                }
+                if (!response.ok) throw new Error('Failed to fetch gemstones');
                 const data = await response.json();
                 setGemstones(data);
             } catch (err) {
@@ -97,14 +69,12 @@ export default function GemstoneCollection() {
     }, []);
 
     const categories = useMemo(() => {
-        const allCategories = gemstones.map((gem) => gem.category);
-        return ['All', ...Array.from(new Set(allCategories))];
+        const all = gemstones.map((gem) => gem.category).filter(Boolean) as string[];
+        return ['All', ...Array.from(new Set(all))];
     }, [gemstones]);
 
     const filteredGemstones = useMemo(() => {
-        if (activeCategory === 'All') {
-            return gemstones;
-        }
+        if (activeCategory === 'All') return gemstones;
         return gemstones.filter((gem) => gem.category === activeCategory);
     }, [gemstones, activeCategory]);
 
@@ -115,16 +85,16 @@ export default function GemstoneCollection() {
                 aria-hidden
                 className="pointer-events-none absolute -top-10 -left-6 font-serif italic text-[220px] leading-none text-stone/[0.03] select-none hidden lg:block"
             >
-        03
-      </span>
+                03
+            </span>
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <div className="flex items-center justify-center gap-3 mb-5">
                         <span className="h-px w-8 bg-gold/70" />
                         <span className="text-[11px] tracking-[0.35em] uppercase text-gold font-medium">
-              The Collection
-            </span>
+                            The Collection
+                        </span>
                         <span className="h-px w-8 bg-gold/70" />
                     </div>
                     <h2 className="font-serif text-4xl md:text-5xl italic text-stone mb-4">
@@ -151,16 +121,14 @@ export default function GemstoneCollection() {
                 <div ref={gridRef} className="mt-14">
                     {loading && (
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-                            {[...Array(6)].map((_, i) => (
-                                <SkeletonCard key={i} />
-                            ))}
+                            {[...Array(6)].map((_, i) => <SkeletonCard key={i} />)}
                         </div>
                     )}
 
                     {error && !loading && (
                         <div className="max-w-md mx-auto text-center py-16 border border-stone/10">
                             <p className="font-serif italic text-2xl text-stone mb-2">
-                                The collection couldn't be reached
+                                The collection couldn&apos;t be reached
                             </p>
                             <p className="text-sm text-mid/70">{error}</p>
                         </div>
@@ -190,32 +158,6 @@ export default function GemstoneCollection() {
                     )}
                 </div>
             </div>
-
-            <style jsx>{`
-                .shimmer {
-                    background: linear-gradient(
-                            90deg,
-                            transparent 0%,
-                            rgba(190, 158, 90, 0.12) 50%,
-                            transparent 100%
-                    );
-                    background-size: 200% 100%;
-                    animation: shimmer 1.8s ease-in-out infinite;
-                }
-                @keyframes shimmer {
-                    0% {
-                        background-position: 200% 0;
-                    }
-                    100% {
-                        background-position: -200% 0;
-                    }
-                }
-                @media (prefers-reduced-motion: reduce) {
-                    .shimmer {
-                        animation: none;
-                    }
-                }
-            `}</style>
         </section>
     );
 }

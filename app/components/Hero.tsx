@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Hero() {
     const [isMounted, setIsMounted] = useState(false);
@@ -18,12 +19,18 @@ export default function Hero() {
 
     return (
         <section id="top" className="relative min-h-screen w-full overflow-hidden flex items-center justify-center">
-            {/* Background Image */}
-            <div
-                className="absolute inset-0 z-0 bg-cover bg-center"
-                style={{ backgroundImage: "url('/images/Blue Hues hero Image.png')" }}
-            >
-                {/* layered vignette — reads as intentional grading rather than a single flat overlay */}
+            {/* Background — Next.js Image for WebP conversion, proper sizing, and LCP optimization */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/images/Blue Hues hero Image.png"
+                    alt=""
+                    fill
+                    priority
+                    quality={90}
+                    className="object-cover object-center"
+                    sizes="100vw"
+                />
+                {/* Layered vignette — reads as intentional grading rather than a flat overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10" />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.35)_100%)]" />
@@ -69,7 +76,7 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Scroll Down Indicator — a slow drawing line reads calmer and more considered than a bouncing icon */}
+            {/* Scroll Down Indicator */}
             <div
                 style={getAnimationStyle(1200)}
                 className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 ${getAnimationClass()}`}
