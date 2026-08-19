@@ -5,16 +5,15 @@ import { ResultSetHeader } from 'mysql2';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, slug, description, origin, category, specs } = body;
+        const { name, slug, description, origin, category, availability, specs } = body;
 
         if (!name || !slug) {
             return NextResponse.json({ error: 'Name and slug are required' }, { status: 400 });
         }
 
         const [result] = await pool.query<ResultSetHeader>(
-            `INSERT INTO gemstones (name, slug, description, origin, category)
-       VALUES (?, ?, ?, ?, ?)`,
-            [name, slug, description || '', origin || '', category || '']
+            `INSERT INTO gemstones (name, slug, description, origin, category, availability) VALUES (?, ?, ?, ?, ?, ?)`,
+            [name, slug, description || '', origin || '', category || '', availability || 'Available']
         );
 
         const gemstoneId = result.insertId;

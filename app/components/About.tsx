@@ -1,111 +1,107 @@
 'use client';
+import { motion } from 'framer-motion';
 
-import Image from 'next/image';
-import { useInView } from '../hooks/useInView';
+const GemBlueprint = () => (
+    <svg viewBox="0 0 100 100" className="w-[120vw] h-[120vw] md:w-[900px] md:h-[900px] stroke-gold/20 stroke-[0.05] fill-transparent overflow-visible">
+        <circle cx="50" cy="50" r="48" />
+        <circle cx="50" cy="50" r="35" />
+        <polygon points="50,2 84,16 98,50 84,84 50,98 16,84 2,50 16,16" />
+        <polygon points="50,15 75,25 85,50 75,75 50,85 25,75 15,50 25,25" />
+    </svg>
+);
 
 export default function About() {
-  const [textRef, textInView] = useInView({ threshold: 0.5, triggerOnce: true });
-  const [imageRef, imageInView] = useInView({ threshold: 0.3, triggerOnce: true });
-
-  return (
-      <section id="about" className="relative py-24 sm:py-32 bg-cream overflow-hidden">
-        {/* faint watermark numeral — quiet editorial texture, not a UI element */}
-        <span
-            aria-hidden
-            className="pointer-events-none absolute -top-10 -left-6 font-serif italic text-[220px] leading-none text-stone/[0.03] select-none hidden lg:block"
-        >
-                01
-            </span>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-            {/* Text */}
-            <div
-                ref={textRef}
-                className={`order-2 md:order-1 text-mid transition-all duration-1000 ${
-                    textInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionTimingFunction: 'var(--ease-lux)' }}
-            >
-              <div className="flex items-center gap-3 mb-5">
-                <span className="h-px w-8 bg-gold/70" />
-                <span className="text-[11px] tracking-[0.35em] uppercase text-gold font-medium">
-                                The Story
-                            </span>
-              </div>
-
-              <h2 className="font-serif text-4xl md:text-5xl italic text-stone mb-8">
-                Our Heritage
-              </h2>
-
-              <div className="space-y-5 text-lg tracking-wide leading-relaxed">
-                <p className="first-letter:font-serif first-letter:italic first-letter:text-gold first-letter:text-6xl first-letter:mr-2 first-letter:float-left first-letter:leading-[0.8] first-letter:mt-1">
-                  For <span className="text-gold">generations</span>, our family has been deeply
-                  rooted in the rich soil of Sri Lanka, unearthing the treasures that lie beneath.
-                  Ceylon Blue Hues is the culmination of this legacy, a bridge between the ancient
-                  traditions of gemstone mining and the modern world.
-                </p>
-                <p>
-                  We are not just merchants; we are{' '}
-                  <span className="font-serif italic text-xl text-stone">custodians</span> of a
-                  craft passed down through time. Each stone we present is a piece of our island's
-                  story, handled with the reverence and expertise that only comes from a lifetime
-                  of dedication.
-                </p>
-              </div>
-
-              <div
-                  className={`mt-10 flex items-center gap-6 transition-all duration-1000 delay-300 ${
-                      textInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                  }`}
-                  style={{ transitionTimingFunction: 'var(--ease-lux)' }}
-              >
-                <div>
-                  <p className="font-serif italic text-3xl text-stone">3rd</p>
-                  <p className="text-[10px] tracking-[0.25em] uppercase text-mid/60 mt-1">
-                    Generation
-                  </p>
-                </div>
-                <span className="h-10 w-px bg-stone/15" />
-                <div>
-                  <p className="font-serif italic text-3xl text-stone">Ratnapura</p>
-                  <p className="text-[10px] tracking-[0.25em] uppercase text-mid/60 mt-1">
-                    City of Gems
-                  </p>
-                </div>
-              </div>
+    return (
+        <section id="about" className="relative bg-cream overflow-hidden flex flex-col items-center justify-center py-32 md:py-48 lg:py-64 px-6 md:px-12">
+            
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-50 overflow-hidden" style={{ maskImage: "linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)", WebkitMaskImage: "linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)" }}>
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 250, repeat: Infinity, ease: "linear" }}
+                    className="absolute z-0"
+                >
+                    <GemBlueprint />
+                </motion.div>
             </div>
 
-            {/* Image */}
-            <div ref={imageRef} className="order-1 md:order-2">
-              <div className="relative">
-                {/* offset frame — sits behind the photo as a quiet signature */}
-                <div
-                    className={`absolute -top-4 -right-4 md:-top-6 md:-right-6 w-full h-full border border-gold/40 transition-all duration-1000 ${
-                        imageInView ? 'opacity-100 translate-x-0 translate-y-0' : 'opacity-0 -translate-x-2 translate-y-2'
-                    }`}
-                    style={{ transitionTimingFunction: 'var(--ease-lux)' }}
-                    aria-hidden
-                />
-                <div className="relative aspect-[4/3] overflow-hidden group">
-                  <Image
-                      src="/images/CeyBlueHuesAbout.jpg"
-                      alt="Artisanal gemstone mining in Sri Lanka"
-                      fill
-                      className={`object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04] ${
-                          imageInView ? 'scale-100' : 'scale-105'
-                      }`}
-                      style={{ transitionTimingFunction: 'var(--ease-lux)' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  <p className="absolute bottom-5 left-5 text-[11px] tracking-[0.25em] uppercase text-white/85">
-                    Ratnapura, Sri Lanka
-                  </p>
+            <div className="w-full max-w-[1000px] mx-auto flex flex-col items-center text-center z-10 relative">
+                
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-12 flex flex-col items-center"
+                >
+                    <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent to-gold/50 mb-6 md:mb-8" />
+                    <span className="font-sans text-[10px] md:text-[12px] uppercase tracking-[0.5em] text-gold font-bold mb-2">
+                        About Us
+                    </span>
+                </motion.div>
+
+                <div className="flex flex-col items-center justify-center gap-0 w-full mb-16 md:mb-24">
+                    <div className="overflow-hidden pb-4 md:pb-8 -mb-4 md:-mb-8">
+                        <motion.h2 
+                            initial={{ y: "100%" }}
+                            whileInView={{ y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                            className="font-serif text-[12vw] md:text-[9vw] lg:text-[8vw] text-navy italic font-light leading-[0.9] tracking-tight"
+                        >
+                            Our Ancient
+                        </motion.h2>
+                    </div>
+                    <div className="overflow-hidden pb-4 md:pb-8 -mb-4 md:-mb-8">
+                        <motion.h2 
+                            initial={{ y: "100%" }}
+                            whileInView={{ y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className="font-serif text-[14vw] md:text-[11vw] lg:text-[10vw] text-navy font-bold leading-[0.9] tracking-tighter uppercase drop-shadow-sm"
+                        >
+                            Heritage
+                        </motion.h2>
+                    </div>
                 </div>
-              </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="mb-16 md:mb-24 px-4 max-w-3xl flex flex-col gap-6"
+                >
+                    <p className="text-xl md:text-2xl font-serif italic text-navy leading-relaxed mb-4">
+                        Sri Lanka has MAINTAINED its two-thousand-year-old tradition of gemstone mining by PROHIBITING large-scale mechanized operations, instead prioritizing the preservation of small-scale mining techniques.
+                    </p>
+                    
+                    <p className="text-navy/70 font-sans font-light text-sm md:text-base leading-relaxed tracking-wide text-center">
+                        This strategy not only creates more job opportunities for local communities but also guarantees the sustainability of gemstone resources for future extraction. Furthermore, Sri Lanka has led the way in improving the visual quality of rubies and sapphires through heat treatment, a method that has been recorded since the 13th century.
+                    </p>
+                </motion.div>
+
+                <div className="w-[1px] h-12 bg-navy/20 mb-16" />
+
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                    className="max-w-3xl px-4 flex flex-col gap-6"
+                >
+                    <h4 className="font-sans text-[10px] uppercase tracking-[0.4em] font-bold text-navy/40 mb-2">
+                        Preserving The Heritage
+                    </h4>
+                    
+                    <p className="text-navy/70 font-sans font-light text-sm md:text-base leading-relaxed tracking-wide text-center">
+                        Gemstones have been culturally significant throughout various civilizations since ancient times, fulfilling roles in trade, personal adornment, and symbolic meaning. In modern society, the cultural and symbolic value of gemstones is frequently overlooked, as the market primarily focuses on their financial or investment potential.
+                    </p>
+                    <p className="text-navy/70 font-sans font-light text-sm md:text-base leading-relaxed tracking-wide text-center">
+                        At the same time, many areas that mine gemstones are encountering unsustainable social, economic, and environmental issues.
+                    </p>
+                </motion.div>
+                
             </div>
-          </div>
-        </div>
-      </section>
-  );
+        </section>
+    );
 }

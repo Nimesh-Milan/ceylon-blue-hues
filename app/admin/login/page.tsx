@@ -1,7 +1,7 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -27,43 +27,67 @@ export default function LoginPage() {
             router.push('/admin');
         } else {
             const data = await res.json();
-            setError(data.error || 'Login failed');
+            setError(data.error || 'Access Denied');
         }
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F9F7F4] px-4">
-            <div className="w-full max-w-sm bg-white border border-[#6B6560]/15 rounded-xl shadow-lg p-8">
-                <h1 className="text-2xl font-light text-[#1A1814] mb-6 text-center">
-                    Admin Login
-                </h1>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full px-4 py-3 border border-[#6B6560]/30 rounded-md focus:outline-none focus:border-[#1A1814]"
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="w-full px-4 py-3 border border-[#6B6560]/30 rounded-md focus:outline-none focus:border-[#1A1814]"
-                    />
-                    {error && <p className="text-red-600 text-sm">{error}</p>}
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full py-3 bg-[#1A1814] text-white rounded-md uppercase text-sm tracking-widest hover:bg-[#2c2924] transition disabled:opacity-50"
-                    >
-                        {loading ? 'Logging in...' : 'Log In'}
-                    </button>
+        <div className="min-h-screen flex items-center justify-center bg-cream px-6 relative overflow-hidden">
+            <motion.div 
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full max-w-lg z-10 flex flex-col items-center"
+            >
+                <div className="mb-16 text-center">
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-navy/40 font-bold block mb-4">Ceylon Blue Hues</span>
+                    <h1 className="text-5xl md:text-7xl font-serif italic text-navy leading-none tracking-tight">Private Access</h1>
+                </div>
+
+                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
+                    <div>
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="w-full bg-transparent border-b border-navy/20 py-4 text-center text-lg font-serif italic text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/30"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full bg-transparent border-b border-navy/20 py-4 text-center text-lg font-serif italic text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/30"
+                        />
+                    </div>
+
+                    {error && (
+                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-700/80 text-[10px] uppercase tracking-[0.2em] font-bold text-center mt-2">
+                            {error}
+                        </motion.p>
+                    )}
+
+                    <div className="flex justify-center mt-8">
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="group relative inline-flex justify-center items-center px-12 py-5 text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 overflow-hidden bg-transparent disabled:opacity-50"
+                        >
+                            <motion.span 
+                                animate={{ x: ['-100%', '200%'] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/20 to-transparent skew-x-12 z-0"
+                            />
+                            <span className="relative z-10 transition-colors duration-500">{loading ? 'Authenticating...' : 'Enter Vault'}</span>
+                        </button>
+                    </div>
                 </form>
-            </div>
+            </motion.div>
         </div>
     );
 }

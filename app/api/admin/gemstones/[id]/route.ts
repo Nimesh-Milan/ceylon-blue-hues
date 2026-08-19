@@ -16,7 +16,17 @@ export async function GET(
         if (rows.length === 0) {
             return NextResponse.json({ error: 'Gemstone not found' }, { status: 404 });
         }
-        return NextResponse.json(rows[0]);
+        
+        const [specs] = await pool.query(
+            'SELECT label, value FROM gemstone_specs WHERE gemstone_id = ? ORDER BY display_order ASC',
+            [id]
+        );
+        
+        const gemstone = rows[0];
+        gemstone.specs = specs;
+        
+        return NextResponse.json(gemstone);
+
     } catch (error) {
         console.error('Failed to fetch gemstone:', error);
         return NextResponse.json({ error: 'Failed to fetch gemstone' }, { status: 500 });
@@ -38,7 +48,7 @@ export async function PATCH(
         }
 
         // Explicitly list fields that are allowed to be updated
-        const allowedFields = ['name', 'slug', 'description', 'origin', 'category', 'inquiry_only'];
+        const allowedFields = ['name', 'slug', 'description', 'origin', 'category', 'inquiry_only', 'availability'];
         const fieldsToUpdate = Object.keys(body).filter(field => allowedFields.includes(field));
 
         if (fieldsToUpdate.length === 0) {

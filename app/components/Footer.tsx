@@ -1,97 +1,114 @@
+'use client';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+const GemBlueprintFooter = () => (
+    <svg viewBox="0 0 100 100" className="w-[120vw] h-[120vw] md:w-[1200px] md:h-[1200px] stroke-gold/10 stroke-[0.05] fill-transparent overflow-visible">
+        <circle cx="50" cy="50" r="48" />
+        <circle cx="50" cy="50" r="20" />
+        <polygon points="50,2 84,16 98,50 84,84 50,98 16,84 2,50 16,16" />
+        <line x1="50" y1="2" x2="50" y2="98" />
+        <line x1="2" y1="50" x2="98" y2="50" />
+    </svg>
+);
+
 export default function Footer() {
-  const links = [
-    { href: '#about', label: 'About' },
-    { href: '#sustainability', label: 'Sustainability' },
-    { href: '#gemstones', label: 'Collection' },
-    { href: '#contact', label: 'Contact' },
-  ];
-
-  const contactDetails = [
-    { label: 'Visit', value: 'Ceylon Blue Hues Pvt Ltd, Level 26, East Tower, World Trade Center, Echelon Square, Colombo 00100, Sri Lanka' },
-    { label: 'Email', value: 'sales-us@ceybluehues.com', href: 'mailto:sales-us@ceybluehues.com' },
-    { label: 'Call ', value: '+94 72 355 3882', href: 'tel:+94723553882' },
-    { label: 'Hours', value: 'Mon–Sat, 9am–6pm' },
-  ];
-
-  return (
-      <footer className="relative bg-cream text-mid border-t border-stone/10">
-        {/* hairline gold accent — closes the loop with the header's top border */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1.3fr] gap-12 md:gap-8">
-            {/* Brand */}
-            <div className="text-center md:text-left">
-              <a
-                  href="#top"
-                  className="font-serif italic text-3xl text-stone hover:text-gold transition-colors duration-500 ease-[var(--ease-lux)]"
-              >
-                Ceylon Blue Hues
-              </a>
-              <p className="text-[11px] tracking-[0.35em] uppercase text-mid/60 mt-3">
-                Fine Ceylon Gemstones
-              </p>
-              <p className="text-sm text-mid/70 mt-5 max-w-xs mx-auto md:mx-0 leading-relaxed">
-                Ethically sourced, artisanally crafted gemstones from the heart of Sri Lanka.
-              </p>
-            </div>
-
-            {/* Explore */}
-            <div className="text-center md:text-left">
-              <h3 className="text-[11px] tracking-[0.3em] uppercase text-gold font-medium mb-5">
-                Explore
-              </h3>
-              <nav className="flex flex-col items-center md:items-start gap-3 text-sm tracking-wide">
-                {links.map((link) => (
-                    <a
-                        key={link.href}
-                        href={link.href}
-                        className="relative group text-mid hover:text-stone transition-colors duration-300"
-                    >
-                      {link.label}
-                      <span className="absolute bottom-0 left-0 h-px w-0 bg-gold transition-all duration-500 ease-[var(--ease-lux)] group-hover:w-full" />
-                    </a>
-                ))}
-              </nav>
-            </div>
-
-            {/* Contact */}
-            <div className="text-center md:text-left">
-              <h3 className="text-[11px] tracking-[0.3em] uppercase text-gold font-medium mb-5">
-                Contact
-              </h3>
-              <ul className="space-y-3 text-sm">
-                {contactDetails.map((item) => (
-                    <li key={item.label} className="flex flex-col md:flex-row md:gap-2 justify-center md:justify-start">
-                      <span className="text-mid/50 tracking-wide">{item.label}</span>
-                      {item.href ? (
-                          <a href={item.href} className="text-stone hover:text-gold transition-colors duration-300">
-                            {item.value}
-                          </a>
-                      ) : (
-                          <span className="text-stone">{item.value}</span>
-                      )}
-                    </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-14 pt-8 border-t border-stone/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs tracking-wider text-mid/50 order-2 sm:order-1">
-              &copy; {new Date().getFullYear()} Ceylon Blue Hues. All Rights Reserved.
-            </p>
-            <a
-                href="#top"
-                className="group order-1 sm:order-2 inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-mid/60 hover:text-gold transition-colors duration-300"
+    return (
+        <footer className="relative bg-cream pt-32 pb-12 overflow-hidden border-t border-navy/5">
+            
+            {/* Massive Spinning Watermark */}
+            <div 
+                className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-50"
+                style={{ 
+                    maskImage: "linear-gradient(to top, transparent, black 20%, black 80%, transparent)", 
+                    WebkitMaskImage: "linear-gradient(to top, transparent, black 20%, black 80%, transparent)" 
+                }}
             >
-              Back to top
-              <span className="transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-0.5">
-                            ↑
-                        </span>
-            </a>
-          </div>
-        </div>
-      </footer>
-  );
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 250, repeat: Infinity, ease: "linear" }}
+                    className="absolute z-0 top-[20%]"
+                >
+                    <GemBlueprintFooter />
+                </motion.div>
+            </div>
+
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10 flex flex-col items-center">
+                
+                {/* Massive Typographic Logo */}
+                <div className="w-full flex flex-col items-center justify-center text-center mb-24 overflow-hidden">
+                    <motion.h2 
+                        initial={{ y: "100%" }}
+                        whileInView={{ y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="font-serif text-[12vw] md:text-[10vw] lg:text-[9vw] text-navy italic font-light leading-none tracking-tight"
+                    >
+                        Ceylon
+                    </motion.h2>
+                    <motion.h2 
+                        initial={{ y: "100%" }}
+                        whileInView={{ y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                        className="font-serif text-[13vw] md:text-[11vw] lg:text-[10vw] text-navy font-bold leading-none tracking-tighter uppercase mt-2"
+                    >
+                        Blue Hues
+                    </motion.h2>
+                </div>
+
+                {/* Minimalist Centered Links */}
+                <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-12 md:gap-24 mb-16 md:mb-32 w-full">
+                    
+                    <div className="flex flex-col items-center text-center gap-4 flex-1">
+                        <span className="font-sans text-[9px] uppercase tracking-[0.4em] text-gold font-bold mb-4">Explore</span>
+                        <Link href="/#gemstones" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">Collection</Link>
+                        <Link href="/#about" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">Heritage</Link>
+                        <Link href="/#sustainability" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">Ethics</Link>
+                        <Link href="/journal" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors mt-2">The Journal</Link>
+                    </div>
+
+                    <div className="hidden md:block w-[1px] h-32 bg-navy/10 mt-4" />
+
+                    <div className="flex flex-col items-center text-center gap-4 flex-1">
+                        <span className="font-sans text-[9px] uppercase tracking-[0.4em] text-gold font-bold mb-4">Direct</span>
+                        <a href="mailto:sales-us@ceybluehues.com" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">sales-us@ceybluehues.com</a>
+                        <a href="tel:+94723553882" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">+94 72 355 3882</a>
+                    </div>
+
+                    <div className="hidden md:block w-[1px] h-32 bg-navy/10 mt-4" />
+
+                    <div className="flex flex-col items-center text-center gap-4 flex-1">
+                        <span className="font-sans text-[9px] uppercase tracking-[0.4em] text-gold font-bold mb-4">Headquarters</span>
+                        <p className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 leading-loose">
+                            Ceylon Blue Hues Pvt Ltd<br/>
+                            Level 26, East Tower<br/>
+                            World Trade Center<br/>
+                            Echelon Square<br/>
+                            Colombo 00100, Sri Lanka
+                        </p>
+                    </div>
+                    
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="w-full flex flex-col md:flex-row items-center justify-between pt-8 border-t border-navy/10">
+                    
+                    <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 mb-6 md:mb-0">
+                        &copy; {new Date().getFullYear()} Ceylon Blue Hues.
+                    </p>
+
+                    <div className="flex items-center gap-6 md:gap-8">
+                        <Link href="/privacy" className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">Privacy</Link>
+                        <Link href="/terms" className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">Terms</Link>
+                        <Link href="/admin/login" className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">Staff</Link>
+                    </div>
+
+                </div>
+
+            </div>
+        </footer>
+    );
 }
+
+

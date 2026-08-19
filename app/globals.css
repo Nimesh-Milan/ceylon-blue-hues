@@ -1,121 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Jost', system-ui, sans-serif;
+  --color-cream: #FDFBF7;
+  --color-navy: #0F1F2C;
+  --color-sage: #5C6B61;
+  --color-gold: #C5A059;
+  --color-gold-muted: #E2D1B3;
 
-  --color-cream: #F9F7F4;
-  --color-stone: #1A1814;
-  --color-mid: #6B6560;
-  --color-gold: #B8965A;
-
-  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Lato", sans-serif;
 }
 
-body {
-  font-family: var(--font-sans);
-  background-color: var(--color-cream);
-  color: var(--color-stone);
+@layer base {
+  html,
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-navy);
+    scroll-behavior: smooth;
+  }
 }
 
-/* ─── Shared Animations ──────────────────────────────────────── */
-
-@keyframes fade-in-rise {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-rise {
-  animation: fade-in-rise 0.9s var(--ease-lux) forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  50% { opacity: 0.5; }
-}
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Shimmer — used by skeleton loaders across the app */
-@keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
 .shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(190, 158, 90, 0.13) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.7s ease-in-out infinite;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
 }
 
-/* Scroll indicator line — used in Hero */
-@keyframes scrollLine {
-  0%   { transform: translateY(-100%); }
-  50%  { transform: translateY(100%); }
-  100% { transform: translateY(200%); }
-}
-
-/* Dot pulse — used in Contact submit button */
-@keyframes dotPulse {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  50%       { opacity: 1;   transform: translateY(-2px); }
-}
-
-/* Fade-media — gemstone gallery/modal media transition */
-@keyframes fadeMedia {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-.fade-media {
-  animation: fadeMedia 400ms var(--ease-lux, ease) both;
-}
-
-/* Header entrance */
-@keyframes header-fade-in {
-  from { opacity: 0; transform: translateY(-1rem); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-header-fade-in {
-  animation: header-fade-in 0.7s var(--ease-lux) forwards;
-}
-
-/* Luxury button */
-.btn-lux {
-  position: relative;
-  overflow: hidden;
-  transition: color 0.6s var(--ease-lux);
-}
-.btn-lux::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-stone);
-  transform: translateX(-100%);
-  transition: transform 0.6s var(--ease-lux);
-  z-index: -1;
-}
-.btn-lux:hover { color: var(--color-cream); }
-.btn-lux:hover::before { transform: translateX(0); }
-
-/* Respect prefers-reduced-motion globally */
-@media (prefers-reduced-motion: reduce) {
-  .shimmer,
-  .fade-media,
-  .animate-fade-in-rise,
-  .animate-header-fade-in {
-    animation: none !important;
-  }
-  * {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }

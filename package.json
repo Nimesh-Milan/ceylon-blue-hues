@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "framer-motion": "^13.1.0",
     "jose": "^6.2.9",
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.23.3",

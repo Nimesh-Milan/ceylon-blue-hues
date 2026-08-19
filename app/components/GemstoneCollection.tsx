@@ -1,48 +1,41 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import GemstoneCard from './GemstoneCard';
-import { useInView } from '../hooks/useInView';
 import type { Gemstone } from '@/types/gemstone';
 
-const SkeletonCard = () => (
-    <div>
-        <div className="aspect-[4/3] bg-stone/[0.06] relative overflow-hidden">
-            <div className="absolute inset-0 shimmer" />
-        </div>
-        <div className="pt-6 pb-2 flex flex-col items-center">
-            <div className="h-6 bg-stone/[0.08] w-2/3 relative overflow-hidden">
-                <div className="absolute inset-0 shimmer" />
-            </div>
-            <div className="h-3 bg-stone/[0.06] w-1/3 mt-3 relative overflow-hidden">
-                <div className="absolute inset-0 shimmer" />
-            </div>
-        </div>
-    </div>
-);
-
 const FilterButton = ({
-    category,
+    label,
     isActive,
     onClick,
 }: {
-    category: string;
+    label: string;
     isActive: boolean;
     onClick: () => void;
 }) => (
     <button
         onClick={onClick}
-        className={`relative pb-2 px-1 text-[11px] tracking-[0.2em] uppercase transition-colors duration-300 ${
-            isActive ? 'text-stone font-medium' : 'text-mid/60 hover:text-stone'
+        className={`px-3 md:px-4 py-2 text-[9px] font-sans font-bold tracking-[0.4em] uppercase transition-colors duration-500 ${
+            isActive ? 'text-gold' : 'text-navy/40 hover:text-navy'
         }`}
     >
-        {category}
-        <span
-            className={`absolute bottom-0 left-0 h-px bg-gold transition-all duration-500 ease-[var(--ease-lux)] ${
-                isActive ? 'w-full' : 'w-0'
-            }`}
-        />
+        {label}
     </button>
+);
+
+const SkeletonCard = () => (
+    <div className="flex flex-col items-center opacity-50">
+        <div className="relative w-full aspect-square mb-8 bg-navy/5 overflow-hidden rounded-md">
+            <div className="absolute inset-0 shimmer opacity-50" />
+        </div>
+        <div className="h-6 bg-navy/5 w-1/2 mb-3 rounded-md relative overflow-hidden">
+            <div className="absolute inset-0 shimmer opacity-50" />
+        </div>
+        <div className="h-2 bg-navy/5 w-1/4 rounded-md relative overflow-hidden">
+            <div className="absolute inset-0 shimmer opacity-50" />
+        </div>
+    </div>
 );
 
 export default function GemstoneCollection() {
@@ -50,7 +43,6 @@ export default function GemstoneCollection() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [activeCategory, setActiveCategory] = useState('All');
-    const [gridRef, gridInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
     useEffect(() => {
         async function fetchGemstones() {
@@ -74,90 +66,101 @@ export default function GemstoneCollection() {
     }, [gemstones]);
 
     const filteredGemstones = useMemo(() => {
-        if (activeCategory === 'All') return gemstones;
-        return gemstones.filter((gem) => gem.category === activeCategory);
+        return gemstones.filter((gem) => {
+            if (activeCategory !== 'All' && gem.category !== activeCategory) return false;
+            return true;
+        });
     }, [gemstones, activeCategory]);
 
     return (
-        <section id="gemstones" className="relative py-24 sm:py-32 bg-white overflow-hidden">
-            {/* watermark numeral */}
-            <span
-                aria-hidden
-                className="pointer-events-none absolute -top-10 -left-6 font-serif italic text-[220px] leading-none text-stone/[0.03] select-none hidden lg:block"
-            >
-                03
-            </span>
-
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center">
-                    <div className="flex items-center justify-center gap-3 mb-5">
-                        <span className="h-px w-8 bg-gold/70" />
-                        <span className="text-[11px] tracking-[0.35em] uppercase text-gold font-medium">
-                            The Collection
+        <section id="gemstones" className="relative py-24 md:py-32 lg:py-40 bg-cream overflow-hidden px-6">
+            
+            <div className="max-w-[1400px] mx-auto relative z-10">
+                
+                <div className="flex flex-col items-center justify-center text-center mb-16 md:mb-24">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        className="mb-8 flex flex-col items-center"
+                    >
+                        <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-transparent to-navy/30 mb-6 md:mb-8" />
+                        <span className="font-sans text-[10px] md:text-[12px] uppercase tracking-[0.5em] text-navy/50 font-bold">
+                            Curated Selection
                         </span>
-                        <span className="h-px w-8 bg-gold/70" />
-                    </div>
-                    <h2 className="font-serif text-4xl md:text-5xl italic text-stone mb-4">
-                        Our Collection
-                    </h2>
-                    <p className="text-lg text-mid max-w-2xl mx-auto">
-                        A curated selection of fine, ethically sourced Sri Lankan gemstones.
-                    </p>
-                </div>
+                    </motion.div>
 
-                {categories.length > 2 && (
-                    <div className="flex justify-center flex-wrap gap-x-10 gap-y-3 mt-14 border-t border-b border-stone/10 py-5">
+                    <div className="flex flex-col items-center justify-center gap-0 w-full mb-12 md:mb-16">
+                        <div className="overflow-hidden pb-4 md:pb-8 -mb-4 md:-mb-8">
+                            <motion.h2 
+                                initial={{ y: "100%" }}
+                                whileInView={{ y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                                className="font-serif text-[10vw] md:text-[8vw] lg:text-[7vw] text-navy italic font-light leading-[0.9]"
+                            >
+                                The Heritage
+                            </motion.h2>
+                        </div>
+                        <div className="overflow-hidden pb-4 md:pb-8 -mb-4 md:-mb-8">
+                            <motion.h2 
+                                initial={{ y: "100%" }}
+                                whileInView={{ y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                                className="font-serif text-[12vw] md:text-[10vw] lg:text-[9vw] text-navy font-bold leading-[0.9] tracking-tighter uppercase"
+                            >
+                                Collection
+                            </motion.h2>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-2 md:gap-6 px-2">
                         {categories.map((cat) => (
-                            <FilterButton
-                                key={cat}
-                                category={cat}
-                                isActive={activeCategory === cat}
-                                onClick={() => setActiveCategory(cat)}
-                            />
+                            <FilterButton key={`cat-${cat}`} label={cat} isActive={activeCategory === cat} onClick={() => setActiveCategory(cat)} />
                         ))}
                     </div>
-                )}
+                </div>
 
-                <div ref={gridRef} className="mt-14">
+                <div>
                     {loading && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-                            {[...Array(6)].map((_, i) => <SkeletonCard key={i} />)}
-                        </div>
-                    )}
-
-                    {error && !loading && (
-                        <div className="max-w-md mx-auto text-center py-16 border border-stone/10">
-                            <p className="font-serif italic text-2xl text-stone mb-2">
-                                The collection couldn&apos;t be reached
-                            </p>
-                            <p className="text-sm text-mid/70">{error}</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-12 gap-y-24 max-w-5xl mx-auto">
+                            {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
                         </div>
                     )}
 
                     {!loading && !error && filteredGemstones.length === 0 && (
-                        <div className="max-w-md mx-auto text-center py-16">
-                            <p className="font-serif italic text-2xl text-stone mb-2">No stones in this category</p>
-                            <p className="text-sm text-mid/70">Try another category, or view the full collection.</p>
+                        <div className="w-full text-center py-20">
+                            <p className="font-serif italic text-2xl text-navy mb-4">No stones found</p>
                         </div>
                     )}
 
                     {!loading && !error && filteredGemstones.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
-                            {filteredGemstones.map((gem, i) => (
-                                <div
-                                    key={gem.id}
-                                    className={`transition-all duration-700 ${
-                                        gridInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                                    }`}
-                                    style={{ transitionDelay: `${i * 60}ms`, transitionTimingFunction: 'var(--ease-lux)' }}
-                                >
-                                    <GemstoneCard gemstone={gem} />
-                                </div>
-                            ))}
-                        </div>
+                        <motion.div 
+                            layout
+                            className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-24 max-w-5xl mx-auto"
+                        >
+                            <AnimatePresence mode="popLayout">
+                                {filteredGemstones.map((gem) => (
+                                    <motion.div
+                                        key={gem.id}
+                                        layout
+                                        initial={{ opacity: 0, y: 50 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, margin: "-100px" }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                                    >
+                                        <GemstoneCard gemstone={gem} />
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </motion.div>
                     )}
                 </div>
             </div>
         </section>
     );
 }
+
