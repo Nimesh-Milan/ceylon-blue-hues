@@ -69,6 +69,14 @@ export default function UnifiedGemstoneEditor({ params }: { params: Promise<{ id
         });
     };
 
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setGemstone({
+            ...gemstone,
+            [name]: value
+        });
+    };
+
     const handleSpecChange = (index: number, field: keyof Spec, value: string) => {
         const newSpecs = [...specs];
         newSpecs[index][field] = value;
@@ -274,7 +282,7 @@ export default function UnifiedGemstoneEditor({ params }: { params: Promise<{ id
                                         </div>
                                         <div>
                                             <label className="block text-[9px] font-bold text-navy/40 uppercase tracking-[0.3em] mb-2">Availability</label>
-                                            <select name="availability" value={gemstone.availability || 'Available'} onChange={handleGemstoneChange} className="w-full bg-transparent border-b border-navy/20 py-3 text-lg font-serif italic text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/20">
+                                            <select name="availability" value={gemstone.availability || 'Available'} onChange={handleSelectChange} className="w-full bg-transparent border-b border-navy/20 py-3 text-lg font-serif italic text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/20">
                                                 <option value="Available">Available</option>
                                                 <option value="Reserved">Reserved</option>
                                                 <option value="Sold">Sold</option>
@@ -422,4 +430,3 @@ export default function UnifiedGemstoneEditor({ params }: { params: Promise<{ id
         </div>
     );
 }
-

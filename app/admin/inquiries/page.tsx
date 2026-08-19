@@ -53,10 +53,10 @@ export default function InquiriesPage() {
                             className={`flex flex-col md:flex-row justify-between py-12 px-4 transition-colors duration-500 ${inq.status === 'unread' ? 'bg-gold/5' : 'hover:bg-[#FDFBF7]'}`}
                         >
                             <div className="flex flex-col gap-4 max-w-3xl">
-                                <div className="flex items-center gap-4 mb-2">
+                                <div className="flex flex-wrap items-center gap-2 md:gap-4 mb-2">
                                     <h3 className="text-2xl font-serif italic text-navy">{inq.name}</h3>
                                     <span className="w-1 h-1 bg-navy/20 rounded-full" />
-                                    <span className="text-[9px] font-bold tracking-[0.3em] uppercase text-navy/40">{inq.email}</span>
+                                    <span className="text-[9px] font-bold tracking-[0.3em] uppercase text-navy/40 break-all">{inq.email}</span>
                                     {inq.status === 'unread' && (
                                         <>
                                             <span className="w-1 h-1 bg-navy/20 rounded-full" />

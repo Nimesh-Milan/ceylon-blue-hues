@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -25,9 +26,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-navy/5 px-6 lg:px-12 h-20 flex items-center justify-between">
                 
                 <div className="flex items-center gap-12">
-                    <Link href="/admin" className="font-serif italic text-2xl text-navy">
-                        CBH Staff
-                    </Link>
+                    <Link href="/admin"><Image src="/images/BlueHuesLogo.png" alt="CBH Admin" width={120} height={40} className="object-contain" priority /></Link>
 
                     <nav className="hidden md:flex items-center gap-8">
                         {navItems.map((item) => {

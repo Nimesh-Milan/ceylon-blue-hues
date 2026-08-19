@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function LoginPage() {
@@ -40,7 +41,7 @@ export default function LoginPage() {
                 className="w-full max-w-lg z-10 flex flex-col items-center"
             >
                 <div className="mb-16 text-center">
-                    <span className="text-[10px] uppercase tracking-[0.4em] text-navy/40 font-bold block mb-4">Ceylon Blue Hues</span>
+                    <div className="flex justify-center mb-8"><Image src="/images/BlueHuesLogo.png" alt="Ceylon Blue Hues Logo" width={200} height={60} className="object-contain" priority /></div>
                     <h1 className="text-5xl md:text-7xl font-serif italic text-navy leading-none tracking-tight">Private Access</h1>
                 </div>
 

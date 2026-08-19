@@ -2,8 +2,10 @@
   "name": "ceylon-blue-hues",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
+    "dev:ngrok": "concurrently --names \"ngrok,next\" -c \"bgGreen.bold,bgBlue.bold\" \"cross-env NGROK_PROXY=socks5://127.0.0.1:1080 ngrok http 3000\" \"npm run dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -26,8 +28,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
+    "ngrok": "^5.0.0-beta.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

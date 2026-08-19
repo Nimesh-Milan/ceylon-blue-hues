@@ -48,6 +48,14 @@ export default function NewGemstonePage() {
         });
     };
 
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setGemstone({
+            ...gemstone,
+            [name]: value
+        });
+    };
+
     const handleSpecChange = (index: number, field: keyof Spec, value: string) => {
         const newSpecs = [...specs];
         newSpecs[index][field] = value;
@@ -90,20 +98,6 @@ export default function NewGemstonePage() {
         } catch (err) {
             setError((err as Error).message);
             setSavingDetails(false);
-        }
-    };
-
-    const handleDeleteGemstone = async () => {
-        if (window.confirm('Permanently delete this gemstone and ALL its media?')) {
-            setIsDeleting(true);
-            try {
-                const res = await fetch(`/api/admin/gemstones/${id}`, { method: 'DELETE' });
-                if (!res.ok) throw new Error('Failed to delete gemstone.');
-                router.push('/admin');
-            } catch (err) {
-                setError((err as Error).message);
-                setIsDeleting(false);
-            }
         }
     };
 
@@ -157,7 +151,7 @@ export default function NewGemstonePage() {
     if (loadingDetails) return <div className="text-center py-20 font-serif text-navy">Loading Editor...</div>;
 
     return (
-        <div className="min-h-screen bg-cream py-6 md:py-10 px-4 md:px-6">
+        <div className="min-h-screen bg-cream py-6 md:py-10">
             <div className="max-w-[1400px] mx-auto">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                     <div>
@@ -174,7 +168,7 @@ export default function NewGemstonePage() {
                     
                     {/* LEFT COLUMN: DETAILS & SPECS */}
                     <div className="lg:col-span-7 space-y-6">
-                        <form onSubmit={handleSaveDetails} className="bg-white border border-navy/15 rounded-xl shadow-sm p-8 space-y-6">
+                        <form onSubmit={handleSaveDetails} className="bg-white border border-navy/15 rounded-xl shadow-sm p-5 md:p-8 space-y-6">
                             <fieldset>
                                 <legend className="text-lg font-serif italic text-navy mb-4">Gemstone Details</legend>
                                 <div className="space-y-4">
@@ -199,7 +193,7 @@ export default function NewGemstonePage() {
                                         </div>
                                         <div>
                                             <label className="block text-[10px] font-bold text-navy/70 uppercase tracking-widest mb-1">Availability</label>
-                                            <select name="availability" value={gemstone.availability || 'Available'} onChange={handleGemstoneChange} className="w-full bg-transparent border-b border-navy/20 py-3 text-lg font-serif italic text-navy focus:outline-none focus:border-gold transition-colors">
+                                            <select name="availability" value={gemstone.availability || 'Available'} onChange={handleSelectChange} className="w-full bg-transparent border-b border-navy/20 py-3 text-lg font-serif italic text-navy focus:outline-none focus:border-gold transition-colors">
                                                 <option value="Available">Available</option>
                                                 <option value="Reserved">Reserved</option>
                                                 <option value="Sold">Sold</option>
@@ -221,9 +215,9 @@ export default function NewGemstonePage() {
                                 <legend className="text-lg font-serif italic text-navy mb-4">Specifications</legend>
                                 <div className="space-y-3">
                                     {specs.map((spec, index) => (
-                                        <div key={index} className="flex items-center gap-3">
-                                            <input type="text" placeholder="Label (e.g., Carat)" value={spec.label} onChange={(e) => handleSpecChange(index, 'label', e.target.value)} className="flex-1 bg-transparent border-b border-navy/20 py-2 text-md font-serif italic text-navy focus:outline-none focus:border-gold transition-colors" />
-                                            <input type="text" placeholder="Value (e.g., 2.5)" value={spec.value} onChange={(e) => handleSpecChange(index, 'value', e.target.value)} className="flex-1 bg-transparent border-b border-navy/20 py-2 text-md font-serif italic text-navy focus:outline-none focus:border-gold transition-colors" />
+                                        <div key={index} className="flex flex-col sm:flex-row sm:items-center gap-3">
+                                            <input type="text" placeholder="Label (e.g., Carat)" value={spec.label} onChange={(e) => handleSpecChange(index, 'label', e.target.value)} className="w-full sm:flex-1 bg-transparent border-b border-navy/20 py-2 text-md font-serif italic text-navy focus:outline-none focus:border-gold transition-colors" />
+                                            <input type="text" placeholder="Value (e.g., 2.5)" value={spec.value} onChange={(e) => handleSpecChange(index, 'value', e.target.value)} className="w-full sm:flex-1 bg-transparent border-b border-navy/20 py-2 text-md font-serif italic text-navy focus:outline-none focus:border-gold transition-colors" />
                                             <button type="button" onClick={() => removeSpec(index)} className="text-red-500 hover:text-red-700 transition-colors px-2">×</button>
                                         </div>
                                     ))}
