@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Button from '@/app/components/Button';
 import { motion } from 'framer-motion';
 
 export default function AdminDashboard() {
@@ -45,9 +46,9 @@ export default function AdminDashboard() {
                     <h1 className="text-[8vw] md:text-5xl lg:text-6xl font-serif italic text-navy mb-4 leading-none tracking-tight">Overview</h1>
                     <p className="text-[9px] uppercase tracking-[0.4em] text-navy/40 font-bold">Workspace & Analytics</p>
                 </div>
-                <Link href="/admin/gemstones/new" className="group relative inline-flex justify-center items-center px-10 py-4 text-[9px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 bg-transparent">
-                    <span className="relative z-10 transition-colors duration-500">+ Add Masterpiece</span>
-                </Link>
+                <Button href="/admin/gemstones/new" size="sm">
+                    + Add Masterpiece
+                </Button>
             </div>
 
             {loading ? (

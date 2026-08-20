@@ -94,7 +94,7 @@ export default function About() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                            className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-justify"
+                            className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-left"
                         >
                             This strategy not only creates more job opportunities for local communities but also guarantees the sustainability of gemstone resources for future extraction. Furthermore, Sri Lanka has led the way in improving the visual quality of rubies and sapphires through heat treatment, a method that has been recorded since the 13th century.
                         </motion.p>
@@ -108,10 +108,10 @@ export default function About() {
                             <h4 className="font-sans text-[10px] uppercase tracking-[0.4em] font-bold text-navy mb-4">
                                 Preserving The Heritage
                             </h4>
-                            <p className="text-navy/80 font-sans text-sm leading-relaxed tracking-wide mb-4 text-justify">
+                            <p className="text-navy/80 font-sans text-sm leading-relaxed tracking-wide mb-4 text-left">
                                 Gemstones have been culturally significant throughout various civilizations since ancient times, fulfilling roles in trade, personal adornment, and symbolic meaning. In modern society, the cultural and symbolic value of gemstones is frequently overlooked, as the market primarily focuses on their financial or investment potential.
                             </p>
-                            <p className="text-navy/80 font-sans text-sm leading-relaxed tracking-wide text-justify">
+                            <p className="text-navy/80 font-sans text-sm leading-relaxed tracking-wide text-left">
                                 At the same time, many areas that mine gemstones are encountering unsustainable social, economic, and environmental issues.
                             </p>
                         </motion.div>

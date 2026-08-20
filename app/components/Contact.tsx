@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Button from './Button';
 
 export default function Contact() {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -76,50 +77,41 @@ export default function Contact() {
                                 </motion.div>
                             ) : (
                                 <>
-                                    <div className="relative group w-full">
+                                    <div className="relative group w-full flex flex-col">
+                                        <label htmlFor="name" className="sr-only">Your Name</label>
                                         <input 
                                             type="text" 
                                             id="name" 
                                             required 
-                                            className="w-full bg-transparent w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/30 hover:bg-navy/[0.03]" 
+                                            className="w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/40 hover:bg-navy/[0.03]" 
                                             placeholder="Your Name" 
                                         />
                                     </div>
-                                    <div className="relative group w-full">
+                                    <div className="relative group w-full flex flex-col">
+                                        <label htmlFor="email" className="sr-only">Email Address</label>
                                         <input 
                                             type="email" 
                                             id="email" 
                                             required 
-                                            className="w-full bg-transparent w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/30 hover:bg-navy/[0.03]" 
+                                            className="w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/40 hover:bg-navy/[0.03]" 
                                             placeholder="Email Address" 
                                         />
                                     </div>
-                                    <div className="relative group mb-6 md:mb-8 w-full">
+                                    <div className="relative group mb-6 md:mb-8 w-full flex flex-col">
+                                        <label htmlFor="message" className="sr-only">Message or Reference ID</label>
                                         <textarea 
                                             id="message" 
                                             rows={2} 
                                             required 
-                                            className="w-full bg-transparent w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/30 hover:bg-navy/[0.03] resize-none" 
+                                            className="w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/40 hover:bg-navy/[0.03] resize-none" 
                                             placeholder="Message or Reference ID"
                                         ></textarea>
                                     </div>
                                     
                                     <div className="flex justify-center mt-4">
-                                        <button 
-                                            type="submit" 
-                                            disabled={status === 'loading'} 
-                                            className="group relative inline-flex justify-center items-center px-10 md:px-16 py-5 md:py-6 text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-cream transition-colors duration-500 overflow-hidden bg-transparent disabled:opacity-50"
-                                        >
-                                            <span className="absolute inset-0 w-full h-full bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1] z-0" />
-                                            <motion.span 
-                                                animate={{ x: ['-100%', '200%'] }}
-                                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/20 to-transparent skew-x-12 z-0"
-                                            />
-                                            <span className="relative z-10 transition-colors duration-500">
-                                                {status === 'loading' ? 'Sending...' : 'Submit Inquiry'}
-                                            </span>
-                                        </button>
+                                        <Button type="submit" disabled={status === 'loading'}>
+                                            {status === 'loading' ? 'Sending...' : 'Submit Inquiry'}
+                                        </Button>
                                     </div>
                                 </>
                             )}

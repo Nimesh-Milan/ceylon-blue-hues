@@ -80,7 +80,7 @@ export default function Sustainability() {
                         className="flex-1"
                     >
                         <h3 className="font-serif text-3xl md:text-4xl text-navy italic mb-6">Land Restoration</h3>
-                        <p className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-justify md:text-left">
+                        <p className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-left md:text-left">
                             By adopting sustainable mining practices, initiating land restoration projects, and enhancing regulatory frameworks, Sri Lanka can preserve its gemstone heritage while protecting its environment. It is crucial to shift towards eco-friendly mining methods to safeguard the island's natural beauty and ensure a sustainable future for both the gemstone industry and the ecosystem.
                         </p>
                     </motion.div>
@@ -95,7 +95,7 @@ export default function Sustainability() {
                         className="flex-1"
                     >
                         <h3 className="font-serif text-3xl md:text-4xl text-navy italic mb-6">Community Cooperatives</h3>
-                        <p className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-justify md:text-left">
+                        <p className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-left md:text-left">
                             Additionally, enabling local communities to manage mining activities through cooperative models can greatly reduce environmental impacts. Involving local residents in the decision-making process and guaranteeing that they benefit from these resources will boost their commitment to sustainable management.
                         </p>
                     </motion.div>

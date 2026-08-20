@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Gemstone } from '@/types/gemstone';
 
 interface GemstoneModalProps {
@@ -62,7 +63,7 @@ export default function GemstoneModal({ gemstone, onClose }: GemstoneModalProps)
                     ref={closeButtonRef}
                     onClick={onClose}
                     aria-label="Close"
-                    className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 text-stone hover:text-gold hover:rotate-90 transition-all duration-500 ease-[var(--ease-lux)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+                    className="absolute top-5 right-5 z-10 flex items-center justify-center w-10 h-10 text-navy hover:text-gold hover:rotate-90 transition-all duration-500 ease-[var(--ease-lux)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M6 18L18 6M6 6l12 12" />
@@ -72,7 +73,7 @@ export default function GemstoneModal({ gemstone, onClose }: GemstoneModalProps)
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 p-8 md:p-12">
                     {/* Media Column */}
                     <div className="flex flex-col gap-4">
-                        <div className="aspect-[4/3] relative bg-stone/5 flex items-center justify-center overflow-hidden">
+                        <div className="aspect-[4/3] relative bg-navy/5 flex items-center justify-center overflow-hidden">
                             {/* key forces CSS re-animation on media switch */}
                             <div key={activeMedia?.file_path} className="absolute inset-0 fade-media">
                                 {activeMedia?.type === 'image' ? (
@@ -107,7 +108,7 @@ export default function GemstoneModal({ gemstone, onClose }: GemstoneModalProps)
                                             aria-label={`Show ${mediaItem.type}`}
                                             aria-pressed={isActive}
                                             className={`aspect-square relative overflow-hidden border transition-all duration-300 ease-[var(--ease-lux)] ${
-                                                isActive ? 'border-gold' : 'border-transparent hover:border-stone/20'
+                                                isActive ? 'border-gold' : 'border-transparent hover:border-navy/20'
                                             }`}
                                         >
                                             {mediaItem.type === 'image' ? (
@@ -118,8 +119,8 @@ export default function GemstoneModal({ gemstone, onClose }: GemstoneModalProps)
                                                     className="object-cover"
                                                 />
                                             ) : (
-                                                <div className="w-full h-full bg-stone/10 flex items-center justify-center">
-                                                    <svg className="w-6 h-6 text-stone/40" fill="currentColor" viewBox="0 0 20 20">
+                                                <div className="w-full h-full bg-navy/10 flex items-center justify-center">
+                                                    <svg className="w-6 h-6 text-navy/40" fill="currentColor" viewBox="0 0 20 20">
                                                         <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm11.586 6.586l-4.293-4.293A1 1 0 0010 7v6a1 1 0 001.293.707l4.293-4.293a1 1 0 000-1.414z" />
                                                     </svg>
                                                 </div>
@@ -136,13 +137,13 @@ export default function GemstoneModal({ gemstone, onClose }: GemstoneModalProps)
                         <span className="text-[11px] tracking-[0.3em] uppercase text-gold font-medium mb-3">
                             Certificate of Provenance
                         </span>
-                        <h2 id="gemstone-modal-title" className="font-serif text-4xl italic text-stone mb-4">
+                        <h2 id="gemstone-modal-title" className="font-serif text-4xl italic text-navy mb-4">
                             {gemstone.name}
                         </h2>
-                        <p className="text-mid text-lg leading-relaxed mb-6">{gemstone.description}</p>
+                        <p className="text-navy/80 text-lg leading-relaxed mb-6">{gemstone.description}</p>
 
-                        <div className="border-t border-stone/10 pt-6">
-                            <h3 className="text-[11px] uppercase tracking-[0.25em] text-mid/60 mb-4">
+                        <div className="border-t border-navy/10 pt-6">
+                            <h3 className="text-[11px] uppercase tracking-[0.25em] text-navy/80/60 mb-4">
                                 Specifications
                             </h3>
                             <ul className="space-y-3">
@@ -154,26 +155,26 @@ export default function GemstoneModal({ gemstone, onClose }: GemstoneModalProps)
                                         }`}
                                         style={{ transitionDelay: `${200 + i * 60}ms` }}
                                     >
-                                        <span className="text-stone/70 text-sm tracking-wide whitespace-nowrap">
+                                        <span className="text-navy/70 text-sm tracking-wide whitespace-nowrap">
                                             {spec.label}
                                         </span>
-                                        <span className="flex-1 border-b border-dotted border-stone/25 translate-y-[-3px]" />
-                                        <span className="font-medium text-stone whitespace-nowrap">{spec.value}</span>
+                                        <span className="flex-1 border-b border-dotted border-navy/25 translate-y-[-3px]" />
+                                        <span className="font-medium text-navy whitespace-nowrap">{spec.value}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
                         <div className="mt-auto pt-10">
-                            <a
+                            <Link
                                 href={`/#contact?gemstone=${gemstone.slug}`}
                                 onClick={onClose}
                                 className="group relative w-full flex items-center justify-center overflow-hidden py-4 px-6 text-white text-[11px] font-medium tracking-[0.25em] uppercase"
                             >
-                                <span className="absolute inset-0 bg-stone transition-transform duration-500 ease-[var(--ease-lux)] group-hover:scale-x-0 origin-right" />
+                                <span className="absolute inset-0 bg-navy transition-transform duration-500 ease-[var(--ease-lux)] group-hover:scale-x-0 origin-right" />
                                 <span className="absolute inset-0 bg-gold scale-x-0 transition-transform duration-500 ease-[var(--ease-lux)] group-hover:scale-x-100 origin-left" />
                                 <span className="relative">Inquire About This Gemstone</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

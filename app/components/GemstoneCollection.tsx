@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Button from './Button';
 import GemstoneCard from './GemstoneCard';
 import type { Gemstone } from '@/types/gemstone';
 
@@ -132,17 +133,9 @@ export default function GemstoneCollection() {
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     className="mt-24 md:mt-32 flex justify-center"
                 >
-                    <Link
-                        href="/collection"
-                        className="group relative inline-flex justify-center items-center px-10 py-5 md:px-14 md:py-6 text-[10px] md:text-[11px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-gold transition-colors duration-500 overflow-hidden bg-transparent"
-                    >
-                        <motion.span 
-                            animate={{ x: ['-100%', '200%'] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 z-0"
-                        />
-                        <span className="relative z-10 transition-colors duration-500">Explore The Full Collection</span>
-                    </Link>
+                    <Button href="/collection">
+                        Explore The Full Collection
+                    </Button>
                 </motion.div>
             </div>
         </section>

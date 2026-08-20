@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
+import Button from '@/app/components/Button';
 import { motion } from 'framer-motion';
 
 export default function SinglePostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -113,14 +114,9 @@ export default function SinglePostPage({ params }: { params: Promise<{ slug: str
                         className="flex flex-col items-center"
                     >
                         <div className="w-[1px] h-16 bg-gradient-to-b from-navy/30 to-transparent mb-8" />
-                        <Link href="/journal" className="group relative inline-flex justify-center items-center px-6 py-4 md:px-16 md:py-6 text-center text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 overflow-hidden bg-transparent">
-                            <motion.span 
-                                animate={{ x: ['-100%', '200%'] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/20 to-transparent skew-x-12 z-0"
-                            />
-                            <span className="relative z-10 transition-colors duration-500">Return to Journal</span>
-                        </Link>
+                        <Button href="/journal" className="px-6 py-4 md:px-16 md:py-6 text-center text-[10px] md:text-[12px]">
+                            Back to Journal
+                        </Button>
                     </motion.div>
 
                 </article>

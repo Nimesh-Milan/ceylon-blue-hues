@@ -23,15 +23,7 @@ export default function GemstoneCard({ gemstone }: { gemstone: Gemstone }) {
                             sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-contain p-4 md:p-8 transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-110 drop-shadow-2xl z-10"
                         />
-                        {gemstone.media.length > 1 && (
-                            <Image
-                                src={gemstone.media[1].file_path}
-                                alt={gemstone.name}
-                                fill
-                                sizes="(max-width: 768px) 100vw, 50vw"
-                                className="object-contain p-4 md:p-8 absolute inset-0 opacity-0 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:scale-110 drop-shadow-2xl z-20"
-                            />
-                        )}
+
                     </>
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-navy/20 font-sans font-bold uppercase tracking-widest text-[10px]">

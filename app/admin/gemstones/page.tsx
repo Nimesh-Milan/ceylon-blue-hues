@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
+import Button from '@/app/components/Button';
 
 interface Gemstone { id: number; name: string; slug: string; category?: string; origin?: string; availability?: string; }
 
@@ -36,9 +37,9 @@ export default function GemstonesDirectory() {
                         onChange={e => setSearch(e.target.value)}
                         className="w-full sm:w-auto bg-transparent border-b border-navy/20 py-2 text-md font-serif italic text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/30"
                     />
-                    <Link href="/admin/gemstones/new" className="group relative inline-flex justify-center items-center px-10 py-4 text-[9px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 bg-transparent whitespace-nowrap">
-                        <span className="relative z-10 transition-colors duration-500">+ Add Masterpiece</span>
-                    </Link>
+                    <Button href="/admin/gemstones/new" size="sm" className="whitespace-nowrap">
+                        + Add Masterpiece
+                    </Button>
                 </div>
             </div>
 

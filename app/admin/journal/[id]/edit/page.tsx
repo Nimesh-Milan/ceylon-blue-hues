@@ -3,6 +3,7 @@ import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Button from '@/app/components/Button';
 
 export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -92,14 +93,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                     <Link href="/admin/journal" className="text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-navy font-bold transition-colors border-b border-transparent hover:border-navy pb-1">
                         Cancel & Return
                     </Link>
-                    <button type="submit" disabled={saving} className="group relative inline-flex justify-center items-center px-16 py-6 text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 overflow-hidden bg-transparent disabled:opacity-50">
-                        <motion.span 
-                            animate={{ x: ['-100%', '200%'] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/20 to-transparent skew-x-12 z-0"
-                        />
-                        <span className="relative z-10 transition-colors duration-500">{saving ? 'Saving...' : 'Save Changes'}</span>
-                    </button>
+                    <Button type="submit" disabled={saving}>
+                        {saving ? 'Saving...' : 'Save Changes'}
+                    </Button>
                 </div>
             </form>
         </div>

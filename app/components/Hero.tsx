@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Button from './Button';
 
 // Elegant Diamond SVG Icon
 const DiamondIcon = ({ className }: { className?: string }) => (
@@ -209,18 +210,9 @@ export default function Hero() {
                         Ethically sourced, world-class gemstones from the historic mines of Ratnapura. Uncompromising quality, absolute traceability.
                     </p>
                     
-                    <Link
-                        href="#gemstones"
-                        className="group relative inline-flex justify-center items-center px-12 py-5 text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-cream transition-colors duration-300 overflow-hidden bg-cream"
-                    >
-                        {/* Continuous shimmer effect on button */}
-                        <motion.span 
-                            animate={{ x: ['-100%', '200%'] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 z-0"
-                        />
-                        <span className="relative z-10 transition-colors duration-300">Discover the Collection</span>
-                    </Link>
+                    <Button href="#gemstones" className="!bg-cream">
+                        Discover the Collection
+                    </Button>
                 </motion.div>
                 
             </div>

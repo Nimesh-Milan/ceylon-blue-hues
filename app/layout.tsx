@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Lato, Playfair_Display } from "next/font/google";
 import "./globals.css";
+
+const lato = Lato({ subsets: ["latin"], weight: ["300", "400", "700"], style: ["normal", "italic"], variable: "--font-sans", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Ceylon Blue Hues",
@@ -12,12 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
-      </head>
+    <html lang="en" className={`h-full antialiased ${lato.variable} ${playfair.variable}`}>
+      
       <body className="min-h-full flex flex-col font-sans bg-cream text-navy">
         {children}
       </body>

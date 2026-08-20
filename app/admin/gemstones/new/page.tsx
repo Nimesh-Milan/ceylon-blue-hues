@@ -3,6 +3,7 @@
 import { useState, useEffect, use, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Button from '@/app/components/Button';
 
 interface Spec { label: string; value: string; }
 interface Media { id: number; file_path: string; type: 'image' | 'video'; display_order: number; }
@@ -228,9 +229,9 @@ export default function NewGemstonePage() {
                             {error && <p className="text-red-600 text-sm mt-4">{error}</p>}
 
                             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-navy/10">
-                                <button type="submit" disabled={savingDetails} className="px-8 py-3 bg-navy text-cream rounded-md text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-gold transition-colors disabled:opacity-50">
+                                <Button type="submit" disabled={savingDetails} size="sm">
                                     {savingDetails ? 'Saving...' : 'Save & Upload Media'}
-                                </button>
+                                </Button>
                                 
                             </div>
                         </form>
@@ -244,13 +245,14 @@ export default function NewGemstonePage() {
                                 <div>
                                     <input type="file" multiple accept="image/*,video/*" className="hidden" ref={fileInputRef} onChange={handleUpload} />
                                     <input type="file" accept="image/*,video/*" className="hidden" ref={replaceInputRef} onChange={handleReplace} />
-                                    <button 
+                                    <Button 
                                         onClick={() => fileInputRef.current?.click()} 
                                         disabled={uploading}
-                                        className="px-4 py-2 bg-navy/5 text-navy border border-navy/10 hover:border-gold hover:text-gold transition-all text-[10px] uppercase tracking-widest font-bold rounded-md disabled:opacity-50"
+                                        size="xs"
+                                        className="whitespace-nowrap"
                                     >
                                         {uploading ? 'Uploading...' : '+ Upload Files'}
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
 

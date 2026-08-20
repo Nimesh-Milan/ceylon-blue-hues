@@ -25,6 +25,15 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => { document.body.style.overflow = ''; };
+    }, [mobileMenuOpen]);
+
     return (
         <>
         <header 
@@ -86,7 +95,7 @@ export default function Header() {
 
                     <button 
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="text-navy flex flex-col items-end gap-1.5 p-2 focus:outline-none z-[60] relative"
+                        className="text-navy flex flex-col items-end gap-1.5 p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold z-[60] relative"
                     >
                         <span className={`block w-6 h-[1px] bg-navy transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
                         <span className={`block h-[1px] bg-navy transition-all duration-300 ${mobileMenuOpen ? 'w-0 opacity-0' : 'w-4'}`} />

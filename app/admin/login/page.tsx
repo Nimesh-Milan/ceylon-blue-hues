@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Button from '@/app/components/Button';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -74,18 +75,9 @@ export default function LoginPage() {
                     )}
 
                     <div className="flex justify-center mt-8">
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="group relative inline-flex justify-center items-center px-12 py-5 text-[10px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 overflow-hidden bg-transparent disabled:opacity-50"
-                        >
-                            <motion.span 
-                                animate={{ x: ['-100%', '200%'] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/20 to-transparent skew-x-12 z-0"
-                            />
-                            <span className="relative z-10 transition-colors duration-500">{loading ? 'Authenticating...' : 'Enter Vault'}</span>
-                        </button>
+                        <Button type="submit" disabled={loading} size="sm">
+                            {loading ? 'Authenticating...' : 'Enter Vault'}
+                        </Button>
                     </div>
                 </form>
             </motion.div>

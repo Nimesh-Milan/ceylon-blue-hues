@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import GemstoneCard from '@/app/components/GemstoneCard';
+import GemstoneGallery from '@/app/components/GemstoneGallery';
+import Button from '@/app/components/Button';
 import type { Gemstone } from '@/types/gemstone';
 
 const DiamondIcon = ({ className }: { className?: string }) => (
@@ -25,7 +27,6 @@ export default function GemstoneShowPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-    const [activeImageIndex, setActiveImageIndex] = useState(0);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -94,52 +95,26 @@ export default function GemstoneShowPage() {
                 <div className="flex flex-col md:flex-row w-full h-full min-h-[calc(100vh-110px)]">
                     
                     {/* Left: Sticky Image Showcase & Thumbnails */}
-                    <div className="w-full md:w-1/2 md:h-[calc(100vh-110px)] md:sticky md:top-[110px] bg-[#FDFBF7] border-r border-navy/5 flex flex-col relative overflow-hidden pt-8 md:pt-0">
+                    <div className="w-full md:w-1/2 h-[70vh] md:h-[calc(100vh-110px)] md:sticky md:top-[110px] bg-[#FDFBF7] border-r border-navy/5 flex flex-col relative overflow-hidden pt-8 md:pt-0">
                         {/* Background glow */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-cream via-transparent to-transparent opacity-50 z-0 pointer-events-none" />
                         
-                        <div className="flex-1 relative flex items-center justify-center p-8 md:p-16">
+                        <div className="relative z-10 w-full flex-1 flex flex-col min-h-0">
                             {gem.media && gem.media.length > 0 ? (
-                                <AnimatePresence mode="wait">
-                                    <motion.div 
-                                        key={activeImageIndex}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 1.05 }}
-                                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                        className="relative w-full h-full max-h-[70vh] flex items-center justify-center mix-blend-multiply z-10 cursor-zoom-in group"
-                                        onClick={() => setLightboxImage(gem.media![activeImageIndex].file_path)}
-                                    >
-                                        <img 
-                                            src={gem.media[activeImageIndex].file_path} 
-                                            alt={gem.name} 
-                                            className="max-w-full max-h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-[2s] ease-out" 
-                                        />
-                                    </motion.div>
-                                </AnimatePresence>
+                                <GemstoneGallery 
+                                    media={gem.media} 
+                                    name={gem.name} 
+                                    onImageClick={(path) => setLightboxImage(path)}
+                                />
                             ) : (
-                                <span className="font-sans font-bold tracking-[0.3em] uppercase text-navy/20 text-[12px] z-10">Image Unavailable</span>
+                                <div className="flex-1 flex items-center justify-center">
+                                    <span className="font-sans font-bold tracking-[0.3em] uppercase text-navy/20 text-[12px]">Image Unavailable</span>
+                                </div>
                             )}
                         </div>
-
-                        {/* Thumbnail Navigation */}
-                        {gem.media && gem.media.length > 0 && (
-                            <div className="relative h-24 md:h-32 border-t border-navy/5 flex items-center justify-center gap-4 z-50 bg-[#FDFBF7]/80 backdrop-blur-sm px-6 overflow-x-auto">
-                                {gem.media.map((m: any, idx: number) => (
-                                    <button
-                                        key={m.id || idx}
-                                        onClick={() => setActiveImageIndex(idx)}
-                                        className={`relative z-10 cursor-pointer flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-sm border transition-all duration-300 overflow-hidden mix-blend-multiply bg-transparent ${activeImageIndex === idx ? 'border-navy shadow-md scale-105' : 'border-navy/10 opacity-50 hover:opacity-100 hover:border-navy/30'}`}
-                                    >
-                                        <img src={m.file_path} alt="Thumbnail" className="w-full h-full object-cover p-1" />
-                                    </button>
-                                ))}
-                            </div>
-                        )}
                     </div>
 
-                    {/* Right: Scrolling Editorial Content */}
-                    <div className="w-full md:w-1/2 flex flex-col px-8 py-16 md:px-16 md:py-24 lg:px-24 lg:py-32 bg-cream">
+                    <div className="w-full md:w-1/2 flex flex-col px-8 pt-10 pb-16 md:px-16 md:pt-12 md:pb-24 lg:px-24 lg:pt-16 lg:pb-32 bg-cream">
                         
                         {/* Top Label with Diamonds */}
                         <motion.div
@@ -243,31 +218,13 @@ export default function GemstoneShowPage() {
                             className="mt-auto pt-12 border-t border-navy/5 flex flex-col items-start gap-6"
                         >
                             {gem.availability === 'Sold' ? (
-                                <Link
-                                    href="/#contact"
-                                    className="group relative inline-flex justify-center items-center px-10 py-5 text-[10px] md:text-[11px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy transition-all duration-500 overflow-hidden hover:border-gold hover:text-cream bg-cream w-full md:w-auto"
-                                >
-                                    <span className="absolute inset-0 w-full h-full bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1] z-0" />
-                                    <motion.span 
-                                        animate={{ x: ['-100%', '200%'] }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                        className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 z-0 pointer-events-none"
-                                    />
-                                    <span className="relative z-10 transition-colors duration-500">Inquire About Similar</span>
-                                </Link>
+                                <Button href="/#contact" className="!bg-cream w-full md:w-auto">
+                                    Inquire About Similar
+                                </Button>
                             ) : (
-                                <Link
-                                    href={`/#contact?stone=${gem.slug}`}
-                                    className="group relative inline-flex justify-center items-center px-10 py-5 text-[10px] md:text-[11px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy transition-all duration-500 overflow-hidden hover:border-gold hover:text-cream bg-cream w-full md:w-auto"
-                                >
-                                    <span className="absolute inset-0 w-full h-full bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1] z-0" />
-                                    <motion.span 
-                                        animate={{ x: ['-100%', '200%'] }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                        className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 z-0 pointer-events-none"
-                                    />
-                                    <span className="relative z-10 transition-colors duration-500">Request Private Viewing</span>
-                                </Link>
+                                <Button href={`/#contact?stone=${gem.slug}`} className="!bg-cream w-full md:w-auto">
+                                    Request Private Viewing
+                                </Button>
                             )}
                             <p className="text-[9px] font-sans font-bold tracking-[0.3em] uppercase text-navy/30">
                                 Reference: CBH-{gem.id?.toString().padStart(4, '0') || '0000'}

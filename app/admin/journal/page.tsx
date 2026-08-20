@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Button from '@/app/components/Button';
 
 export default function JournalDirectory() {
     const [posts, setPosts] = useState<any[]>([]);
@@ -21,9 +22,9 @@ export default function JournalDirectory() {
                     <h1 className="text-[8vw] md:text-5xl lg:text-6xl font-serif italic text-navy mb-4 leading-none tracking-tight">The Journal</h1>
                     <p className="text-[9px] uppercase tracking-[0.4em] text-navy/40 font-bold">Editorial Archive</p>
                 </div>
-                <Link href="/admin/journal/new" className="group relative inline-flex justify-center items-center px-10 py-4 text-[9px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:text-gold hover:border-gold transition-colors duration-500 bg-transparent whitespace-nowrap">
-                    <span className="relative z-10 transition-colors duration-500">+ Draft Story</span>
-                </Link>
+                <Button href="/admin/journal/new" size="sm" className="whitespace-nowrap">
+                    + Draft Story
+                </Button>
             </div>
 
             {loading ? (
