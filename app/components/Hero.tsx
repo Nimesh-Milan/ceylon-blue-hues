@@ -211,7 +211,7 @@ export default function Hero() {
                     
                     <Link
                         href="#gemstones"
-                        className="group relative inline-flex justify-center items-center px-12 py-5 text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-gold transition-colors duration-300 overflow-hidden bg-cream"
+                        className="group relative inline-flex justify-center items-center px-12 py-5 text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-cream transition-colors duration-300 overflow-hidden bg-cream"
                     >
                         {/* Continuous shimmer effect on button */}
                         <motion.span 

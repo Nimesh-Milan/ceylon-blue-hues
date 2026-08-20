@@ -1,28 +1,10 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import GemstoneCard from './GemstoneCard';
 import type { Gemstone } from '@/types/gemstone';
-
-const FilterButton = ({
-    label,
-    isActive,
-    onClick,
-}: {
-    label: string;
-    isActive: boolean;
-    onClick: () => void;
-}) => (
-    <button
-        onClick={onClick}
-        className={`px-3 md:px-4 py-2 text-[9px] font-sans font-bold tracking-[0.4em] uppercase transition-colors duration-500 ${
-            isActive ? 'text-gold' : 'text-navy/40 hover:text-navy'
-        }`}
-    >
-        {label}
-    </button>
-);
 
 const SkeletonCard = () => (
     <div className="flex flex-col items-center opacity-50">
@@ -42,7 +24,6 @@ export default function GemstoneCollection() {
     const [gemstones, setGemstones] = useState<Gemstone[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [activeCategory, setActiveCategory] = useState('All');
 
     useEffect(() => {
         async function fetchGemstones() {
@@ -50,7 +31,8 @@ export default function GemstoneCollection() {
                 const response = await fetch('/api/gemstones');
                 if (!response.ok) throw new Error('Failed to fetch gemstones');
                 const data = await response.json();
-                setGemstones(data);
+                // Only show 4 featured gemstones on the homepage
+                setGemstones(data.slice(0, 4));
             } catch (err) {
                 setError(err instanceof Error ? err.message : 'An unknown error occurred');
             } finally {
@@ -60,20 +42,8 @@ export default function GemstoneCollection() {
         fetchGemstones();
     }, []);
 
-    const categories = useMemo(() => {
-        const all = gemstones.map((gem) => gem.category).filter(Boolean) as string[];
-        return ['All', ...Array.from(new Set(all))];
-    }, [gemstones]);
-
-    const filteredGemstones = useMemo(() => {
-        return gemstones.filter((gem) => {
-            if (activeCategory !== 'All' && gem.category !== activeCategory) return false;
-            return true;
-        });
-    }, [gemstones, activeCategory]);
-
     return (
-        <section id="gemstones" className="relative py-24 md:py-32 lg:py-40 bg-cream overflow-hidden px-6">
+        <section id="gemstones" className="relative py-16 md:py-20 lg:py-24 bg-cream overflow-hidden px-6">
             
             <div className="max-w-[1400px] mx-auto relative z-10">
                 
@@ -91,7 +61,7 @@ export default function GemstoneCollection() {
                         </span>
                     </motion.div>
 
-                    <div className="flex flex-col items-center justify-center gap-0 w-full mb-12 md:mb-16">
+                    <div className="flex flex-col items-center justify-center gap-0 w-full mb-12">
                         <div className="overflow-hidden pb-4 md:pb-8 -mb-4 md:-mb-8">
                             <motion.h2 
                                 initial={{ y: "100%" }}
@@ -100,7 +70,7 @@ export default function GemstoneCollection() {
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                                 className="font-serif text-[10vw] md:text-[8vw] lg:text-[7vw] text-navy italic font-light leading-[0.9]"
                             >
-                                The Heritage
+                                Featured
                             </motion.h2>
                         </div>
                         <div className="overflow-hidden pb-4 md:pb-8 -mb-4 md:-mb-8">
@@ -111,38 +81,32 @@ export default function GemstoneCollection() {
                                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 className="font-serif text-[12vw] md:text-[10vw] lg:text-[9vw] text-navy font-bold leading-[0.9] tracking-tighter uppercase"
                             >
-                                Collection
+                                Masterpieces
                             </motion.h2>
                         </div>
-                    </div>
-
-                    <div className="flex flex-wrap justify-center gap-2 md:gap-6 px-2">
-                        {categories.map((cat) => (
-                            <FilterButton key={`cat-${cat}`} label={cat} isActive={activeCategory === cat} onClick={() => setActiveCategory(cat)} />
-                        ))}
                     </div>
                 </div>
 
                 <div>
                     {loading && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-x-12 gap-y-24 max-w-5xl mx-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-24 max-w-5xl mx-auto">
                             {[...Array(4)].map((_, i) => <SkeletonCard key={i} />)}
                         </div>
                     )}
 
-                    {!loading && !error && filteredGemstones.length === 0 && (
+                    {!loading && !error && gemstones.length === 0 && (
                         <div className="w-full text-center py-20">
                             <p className="font-serif italic text-2xl text-navy mb-4">No stones found</p>
                         </div>
                     )}
 
-                    {!loading && !error && filteredGemstones.length > 0 && (
+                    {!loading && !error && gemstones.length > 0 && (
                         <motion.div 
                             layout
                             className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-24 max-w-5xl mx-auto"
                         >
                             <AnimatePresence mode="popLayout">
-                                {filteredGemstones.map((gem) => (
+                                {gemstones.map((gem) => (
                                     <motion.div
                                         key={gem.id}
                                         layout
@@ -159,8 +123,28 @@ export default function GemstoneCollection() {
                         </motion.div>
                     )}
                 </div>
+
+                {/* Explore Collection CTA */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="mt-24 md:mt-32 flex justify-center"
+                >
+                    <Link
+                        href="/collection"
+                        className="group relative inline-flex justify-center items-center px-10 py-5 md:px-14 md:py-6 text-[10px] md:text-[11px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-gold transition-colors duration-500 overflow-hidden bg-transparent"
+                    >
+                        <motion.span 
+                            animate={{ x: ['-100%', '200%'] }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-gold/30 to-transparent skew-x-12 z-0"
+                        />
+                        <span className="relative z-10 transition-colors duration-500">Explore The Full Collection</span>
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );
 }
-

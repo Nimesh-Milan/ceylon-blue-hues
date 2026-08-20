@@ -12,7 +12,7 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-24 md:py-32 lg:py-40 bg-cream relative overflow-hidden flex flex-col items-center px-6">
+        <section id="contact" className="py-16 md:py-20 lg:py-24 bg-cream relative overflow-hidden flex flex-col items-center px-6">
             
             <div className="max-w-[1400px] mx-auto relative z-10 w-full">
                 
@@ -81,7 +81,7 @@ export default function Contact() {
                                             type="text" 
                                             id="name" 
                                             required 
-                                            className="w-full bg-transparent border-b border-navy/20 py-3 md:py-4 text-center font-serif text-xl md:text-3xl text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/20" 
+                                            className="w-full bg-transparent w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/30 hover:bg-navy/[0.03]" 
                                             placeholder="Your Name" 
                                         />
                                     </div>
@@ -90,7 +90,7 @@ export default function Contact() {
                                             type="email" 
                                             id="email" 
                                             required 
-                                            className="w-full bg-transparent border-b border-navy/20 py-3 md:py-4 text-center font-serif text-xl md:text-3xl text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/20" 
+                                            className="w-full bg-transparent w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/30 hover:bg-navy/[0.03]" 
                                             placeholder="Email Address" 
                                         />
                                     </div>
@@ -99,7 +99,7 @@ export default function Contact() {
                                             id="message" 
                                             rows={2} 
                                             required 
-                                            className="w-full bg-transparent border-b border-navy/20 py-3 md:py-4 text-center font-serif text-xl md:text-3xl text-navy focus:outline-none focus:border-gold transition-colors placeholder-navy/20 resize-none" 
+                                            className="w-full bg-transparent w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/30 hover:bg-navy/[0.03] resize-none" 
                                             placeholder="Message or Reference ID"
                                         ></textarea>
                                     </div>
@@ -108,8 +108,9 @@ export default function Contact() {
                                         <button 
                                             type="submit" 
                                             disabled={status === 'loading'} 
-                                            className="group relative inline-flex justify-center items-center px-10 md:px-16 py-5 md:py-6 text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-gold transition-colors duration-500 overflow-hidden bg-transparent disabled:opacity-50"
+                                            className="group relative inline-flex justify-center items-center px-10 md:px-16 py-5 md:py-6 text-[10px] md:text-[12px] font-sans font-bold tracking-[0.3em] uppercase text-navy border border-navy hover:border-gold hover:text-cream transition-colors duration-500 overflow-hidden bg-transparent disabled:opacity-50"
                                         >
+                                            <span className="absolute inset-0 w-full h-full bg-gold -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1] z-0" />
                                             <motion.span 
                                                 animate={{ x: ['-100%', '200%'] }}
                                                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}

@@ -51,3 +51,20 @@ export async function PATCH(request: Request) {
         return NextResponse.json({ error: 'Failed to update inquiry' }, { status: 500 });
     }
 }
+
+export async function DELETE(request: Request) {
+    try {
+        const url = new URL(request.url);
+        const id = url.searchParams.get('id');
+
+        if (!id) {
+            return NextResponse.json({ error: 'id is required' }, { status: 400 });
+        }
+
+        await pool.query('DELETE FROM inquiries WHERE id = ?', [id]);
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error('Failed to delete inquiry:', error);
+        return NextResponse.json({ error: 'Failed to delete inquiry' }, { status: 500 });
+    }
+}

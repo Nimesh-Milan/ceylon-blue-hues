@@ -41,7 +41,7 @@ export default function LoginPage() {
                 className="w-full max-w-lg z-10 flex flex-col items-center"
             >
                 <div className="mb-16 text-center">
-                    <div className="flex justify-center mb-8"><Image src="/images/BlueHuesLogo.png" alt="Ceylon Blue Hues Logo" width={200} height={60} className="object-contain" priority /></div>
+                    <div className="flex justify-center mb-8"><Image src="/images/BlueHuesLogo.png" alt="Ceylon Blue Hues Logo" width={200} height={60} className="object-contain [filter:brightness(0)_invert(7%)_sepia(26%)_saturate(1512%)_hue-rotate(175deg)_brightness(96%)_contrast(95%)]" priority /></div>
                     <h1 className="text-5xl md:text-7xl font-serif italic text-navy leading-none tracking-tight">Private Access</h1>
                 </div>
 

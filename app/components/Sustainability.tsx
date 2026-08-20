@@ -13,7 +13,7 @@ export default function Sustainability() {
     const xMarquee2 = useTransform(scrollYProgress, [0, 1], ["-50%", "0%"]);
 
     return (
-        <section id="sustainability" ref={containerRef} className="relative bg-[#FDFBF7] py-32 md:py-48 px-6 md:px-12 overflow-hidden border-t border-navy/5 w-full">
+        <section id="sustainability" ref={containerRef} className="relative bg-gradient-to-b from-[#FDFBF7] to-cream py-16 md:py-24 px-6 md:px-12 overflow-hidden border-t border-navy/5 w-full">
             
             <div className="absolute inset-0 z-0 flex flex-col justify-center pointer-events-none opacity-[0.03] overflow-hidden gap-8 w-full">
                 <motion.div style={{ x: xMarquee1 }} className="whitespace-nowrap">
@@ -80,7 +80,7 @@ export default function Sustainability() {
                         className="flex-1"
                     >
                         <h3 className="font-serif text-3xl md:text-4xl text-navy italic mb-6">Land Restoration</h3>
-                        <p className="text-navy/70 font-sans font-light text-sm md:text-base leading-relaxed tracking-wide text-justify md:text-left">
+                        <p className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-justify md:text-left">
                             By adopting sustainable mining practices, initiating land restoration projects, and enhancing regulatory frameworks, Sri Lanka can preserve its gemstone heritage while protecting its environment. It is crucial to shift towards eco-friendly mining methods to safeguard the island's natural beauty and ensure a sustainable future for both the gemstone industry and the ecosystem.
                         </p>
                     </motion.div>
@@ -95,7 +95,7 @@ export default function Sustainability() {
                         className="flex-1"
                     >
                         <h3 className="font-serif text-3xl md:text-4xl text-navy italic mb-6">Community Cooperatives</h3>
-                        <p className="text-navy/70 font-sans font-light text-sm md:text-base leading-relaxed tracking-wide text-justify md:text-left">
+                        <p className="text-navy/80 font-sans text-sm md:text-base leading-relaxed tracking-wide text-justify md:text-left">
                             Additionally, enabling local communities to manage mining activities through cooperative models can greatly reduce environmental impacts. Involving local residents in the decision-making process and guaranteeing that they benefit from these resources will boost their commitment to sustainable management.
                         </p>
                     </motion.div>
@@ -109,7 +109,7 @@ export default function Sustainability() {
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
                     className="mt-32 p-8 md:p-12 border border-navy/10 bg-white/50 backdrop-blur-sm max-w-4xl text-center relative"
                 >
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#FDFBF7] border border-gold rotate-45" />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gradient-to-b from-[#FDFBF7] to-cream border border-gold rotate-45" />
                     <p className="font-serif italic text-navy text-xl md:text-2xl leading-relaxed">
                         Our Objective is to ENSURE that artisanal mining PRACTICES are Safeguarded.
                     </p>

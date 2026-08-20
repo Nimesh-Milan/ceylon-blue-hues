@@ -26,7 +26,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <header className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-navy/5 px-6 lg:px-12 h-20 flex items-center justify-between">
                 
                 <div className="flex items-center gap-12">
-                    <Link href="/admin"><Image src="/images/BlueHuesLogo.png" alt="CBH Admin" width={120} height={40} className="object-contain" priority /></Link>
+                    <Link href="/admin"><Image src="/images/BlueHuesLogo.png" alt="CBH Admin" width={120} height={40} className="object-contain [filter:brightness(0)_invert(7%)_sepia(26%)_saturate(1512%)_hue-rotate(175deg)_brightness(96%)_contrast(95%)]" priority /></Link>
 
                     <nav className="hidden md:flex items-center gap-8">
                         {navItems.map((item) => {

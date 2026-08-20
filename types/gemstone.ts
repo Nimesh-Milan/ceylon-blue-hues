@@ -20,6 +20,7 @@ export interface Gemstone {
     origin?: string;
     category: string;
     inquiry_only?: boolean;
+    availability?: string;
     display_order?: number;
     specs: GemstoneSpec[];
     media: GemstoneMedia[];

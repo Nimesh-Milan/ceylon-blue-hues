@@ -25,6 +25,7 @@ export default function Footer() {
                 }}
             >
                 <motion.div
+                    style={{ willChange: "transform", transform: "translateZ(0)" }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 250, repeat: Infinity, ease: "linear" }}
                     className="absolute z-0 top-[20%]"
@@ -62,10 +63,22 @@ export default function Footer() {
                     
                     <div className="flex flex-col items-center text-center gap-4 flex-1">
                         <span className="font-sans text-[9px] uppercase tracking-[0.4em] text-gold font-bold mb-4">Explore</span>
-                        <Link href="/#gemstones" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">Collection</Link>
-                        <Link href="/#about" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">Heritage</Link>
-                        <Link href="/#sustainability" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">Ethics</Link>
-                        <Link href="/journal" className="font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors mt-2">The Journal</Link>
+                        <Link href="/collection" className="relative group font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">
+                            Collection
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                        <Link href="/#about" className="relative group font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">
+                            Heritage
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                        <Link href="/#sustainability" className="relative group font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors">
+                            Ethics
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                        <Link href="/journal" className="relative group font-sans text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-navy/60 hover:text-navy transition-colors mt-2">
+                            The Journal
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
                     </div>
 
                     <div className="hidden md:block w-[1px] h-32 bg-navy/10 mt-4" />
@@ -99,9 +112,18 @@ export default function Footer() {
                     </p>
 
                     <div className="flex items-center gap-6 md:gap-8">
-                        <Link href="/privacy" className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">Privacy</Link>
-                        <Link href="/terms" className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">Terms</Link>
-                        <Link href="/admin/login" className="font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">Staff</Link>
+                        <Link href="/privacy" className="relative group font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">
+                            Privacy
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                        <Link href="/terms" className="relative group font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">
+                            Terms
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
+                        <Link href="/admin/login" className="relative group font-sans text-[9px] uppercase tracking-[0.3em] text-navy/40 hover:text-gold transition-colors">
+                            Staff
+                            <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-gold -translate-x-1/2 transition-all duration-300 group-hover:w-full" />
+                        </Link>
                     </div>
 
                 </div>

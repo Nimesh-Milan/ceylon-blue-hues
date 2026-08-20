@@ -26,6 +26,7 @@ export default function Header() {
     }, []);
 
     return (
+        <>
         <header 
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
                 mobileMenuOpen ? 'py-4 bg-cream' : (isScrolled ? 'py-4 bg-cream/80 backdrop-blur-md shadow-[0_10px_30px_-15px_rgba(4,20,44,0.05)]' : 'py-8 bg-transparent')
@@ -38,7 +39,7 @@ export default function Header() {
                     
                     {/* Left Navigation */}
                     <nav className="flex items-center gap-10 justify-start">
-                        <NavLink href="/#gemstones">Collection</NavLink>
+                        <NavLink href="/collection">Collection</NavLink>
                         <NavLink href="/#about">Heritage</NavLink>
                         <NavLink href="/#sustainability">Ethics</NavLink>
                     </nav>
@@ -51,7 +52,7 @@ export default function Header() {
                                 alt="Ceylon Blue Hues Logo"
                                 width={200}
                                 height={60}
-                                className={`object-contain transition-transform duration-700 ${isScrolled ? 'scale-90' : 'scale-100'}`}
+                                className={`object-contain transition-transform duration-700 ${isScrolled ? 'scale-90' : 'scale-100'} [filter:brightness(0)_invert(7%)_sepia(26%)_saturate(1512%)_hue-rotate(175deg)_brightness(96%)_contrast(95%)]`}
                                 priority
                             />
                         </Link>
@@ -78,7 +79,7 @@ export default function Header() {
                             alt="Ceylon Blue Hues Logo"
                             width={160}
                             height={48}
-                            className="object-contain"
+                            className="object-contain [filter:brightness(0)_invert(7%)_sepia(26%)_saturate(1512%)_hue-rotate(175deg)_brightness(96%)_contrast(95%)]"
                             priority
                         />
                     </Link>
@@ -95,6 +96,8 @@ export default function Header() {
 
             </div>
 
+        </header>
+
             {/* Mobile Fullscreen Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
@@ -103,10 +106,10 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: "-100%" }}
                         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-0 bg-cream z-50 flex flex-col items-center justify-center"
+                        className="fixed inset-0 bg-cream z-40 flex flex-col items-center justify-center pt-20"
                     >
                         <nav className="flex flex-col items-center gap-10">
-                            <Link href="/#gemstones" onClick={() => setMobileMenuOpen(false)} className="font-serif text-4xl text-navy italic">Collection</Link>
+                            <Link href="/collection" onClick={() => setMobileMenuOpen(false)} className="font-serif text-4xl text-navy italic">Collection</Link>
                             <Link href="/#about" onClick={() => setMobileMenuOpen(false)} className="font-serif text-4xl text-navy italic">Heritage</Link>
                             <Link href="/#sustainability" onClick={() => setMobileMenuOpen(false)} className="font-serif text-4xl text-navy italic">Ethics</Link>
                             <Link href="/journal" onClick={() => setMobileMenuOpen(false)} className="font-serif text-4xl text-navy italic">Journal</Link>
@@ -117,6 +120,6 @@ export default function Header() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header>
+        </>
     );
 }
