@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
-import Button from '@/app/components/Button';
+import Button from '../../components/Button';
 
 interface Gemstone { id: number; name: string; slug: string; category?: string; origin?: string; availability?: string; }
 

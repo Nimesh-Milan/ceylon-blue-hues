@@ -3,7 +3,8 @@
 import { useState, useEffect, use, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Button from '@/app/components/Button';
+import Button from '../../../components/Button';
+
 
 interface Spec { label: string; value: string; }
 interface Media { id: number; file_path: string; type: 'image' | 'video'; display_order: number; }

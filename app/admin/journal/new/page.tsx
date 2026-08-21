@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import Button from '@/app/components/Button';
+import Button from '../../../components/Button';
 
 export default function NewPostPage() {
     const router = useRouter();
