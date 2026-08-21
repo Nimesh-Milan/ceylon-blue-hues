@@ -83,7 +83,7 @@ export default function Contact() {
                                             type="text" 
                                             id="name" 
                                             required 
-                                            className="w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/40 hover:bg-navy/[0.03]" 
+                                            className="w-full bg-transparent border-0 border-b border-gold/40 py-4 md:py-6 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:ring-0 focus:border-gold transition-colors duration-500 placeholder-navy/30" 
                                             placeholder="Your Name" 
                                         />
                                     </div>
@@ -93,7 +93,7 @@ export default function Contact() {
                                             type="email" 
                                             id="email" 
                                             required 
-                                            className="w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/40 hover:bg-navy/[0.03]" 
+                                            className="w-full bg-transparent border-0 border-b border-gold/40 py-4 md:py-6 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:ring-0 focus:border-gold transition-colors duration-500 placeholder-navy/30" 
                                             placeholder="Email Address" 
                                         />
                                     </div>
@@ -103,7 +103,7 @@ export default function Contact() {
                                             id="message" 
                                             rows={2} 
                                             required 
-                                            className="w-full bg-navy/[0.02] border-b border-navy/20 py-4 md:py-5 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus:bg-navy/[0.04] focus:border-gold transition-all duration-300 placeholder-navy/40 hover:bg-navy/[0.03] resize-none" 
+                                            className="w-full bg-transparent border-0 border-b border-gold/40 py-4 md:py-6 px-4 text-center font-serif text-xl md:text-2xl text-navy focus:outline-none focus:ring-0 focus:border-gold transition-colors duration-500 placeholder-navy/30 resize-none" 
                                             placeholder="Message or Reference ID"
                                         ></textarea>
                                     </div>
@@ -122,3 +122,4 @@ export default function Contact() {
         </section>
     );
 }
+
